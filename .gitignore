@@ -24,11 +24,14 @@ tomcat
 
 # Maven 
 target/
+test/
 
 # IntelliJ project files 
 *.iml
 *.iws
 *.ipr
+*.xml
+*.mf
 .idea/
 
 # eclipse project file
@@ -37,6 +40,7 @@ target/
 .project
 
 # NetBeans specific
+nbproject/
 nbproject/private/
 build/
 nbbuild/
@@ -44,7 +48,6 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
-
 
 # OS
 .DS_Store
