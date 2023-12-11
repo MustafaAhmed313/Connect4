@@ -24,12 +24,12 @@ public class GameEventlistner implements GLEventListener {
     public void display(GLAutoDrawable glAutoDrawable) {
         GL gl =glAutoDrawable.getGL();
 
-        gl.glBegin(GL.GL_POLYGON);
-        gl.glVertex2i(150,150);
-        gl.glVertex2i(200,200);
-        gl.glVertex2i(90,90);
-        gl.glVertex2i(180,180);
-        gl.glEnd();
+//        gl.glBegin(GL.GL_POLYGON);
+//        gl.glVertex2i(150,150);
+//        gl.glVertex2i(200,200);
+//        gl.glVertex2i(90,90);
+//        gl.glVertex2i(180,180);
+//        gl.glEnd();
 
     }
 
