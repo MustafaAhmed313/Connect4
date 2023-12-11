@@ -12,7 +12,11 @@ public class UserData {
     private int level ;  // 1 for easy and 2 for minimum and 3 for hard
     private int design ;   // 1 for Basic Them and 2 for Ice and Fire Them
     private int  numPlayer ;
+    private int backSound =1;
+    private int gameSound =1;
+    boolean flag = true ;
      
+    
     
 
     public UserData(){
@@ -67,6 +71,22 @@ public class UserData {
 
     public void setName2(String name2) {
         this.name2 = name2;
+    }
+
+    public int getBackSound() {
+        return backSound;
+    }
+
+    public void setBackSound(int backSount) {
+        this.backSound = backSount;
+    }
+
+    public int getGameSound() {
+        return gameSound;
+    }
+
+    public void setGameSound(int gameSound) {
+        this.gameSound = gameSound;
     }
     
 }
