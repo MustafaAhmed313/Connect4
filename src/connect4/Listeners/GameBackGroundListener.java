@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Listeners;
+package connect4.Listeners;
 
 /**
  *
@@ -10,6 +10,7 @@ package Listeners;
  */
 
 import connect4.Texture.TextureReader;
+import connect4.GameEngine.Engine;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,7 +20,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.BitSet;
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
@@ -30,7 +30,11 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
     int maxWidth = 100; //Initial Positions
     int maxHeight = 100;
     int xposition = 0 , yposition = 0;
-    int animationIndex = 0;
+
+    int x = 0 , y = 0;
+
+    static Engine game = new Engine();
+    static int nextColumnIndex = 0;
 
 
     String[] textureNames = {"Bord.png" , "POG-red.png" ,"Flat_Game_Background_3 1.png"}; //The Sprits
@@ -121,7 +125,7 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
 
         gl.glScaled(0.1 * scale, 0.1 * scale, 1);
 
-        System.out.println(x + " " + y);
+//        System.out.println(x + " " + y);
 
         gl.glBegin(GL.GL_QUADS);
         // Front Face
@@ -189,6 +193,36 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
         return keyBits.get(keyCode);
     }
 
+    private void handleMousePosition() {
+        if (xposition >= -271 && xposition <= -210) {
+            nextColumnIndex = 0;
+            x = -60;
+        }
+        if (xposition >= -191 && xposition <= -130) {
+            nextColumnIndex = 1;
+            x = -40;
+        }
+        if (xposition >= -112 && xposition <= -51) {
+            nextColumnIndex = 2;
+            x = -20;
+        }
+        if (xposition >= -32 && xposition <= 29) {
+            nextColumnIndex = 3;
+            x = 0;
+        }
+        if (xposition >= 47 && xposition <= 109) {
+            nextColumnIndex = 4;
+            x = 20;
+        }
+        if (xposition >= 128 && xposition <= 188) {
+            nextColumnIndex = 5;
+            x = 40;
+        }
+        if (xposition >= 207 && xposition <= 269) {
+            nextColumnIndex = 6;
+            x = 60;
+        }
+    }
 
     @Override
     public void display(GLAutoDrawable glAutoDrawable) {
@@ -201,7 +235,7 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
 //
 //        handleKeyPress();
 
-//        drawSprite(gl , xposition , yposition , 1 , 1);
+        drawSprite(gl , x , y , 1 , 1);
 //
         drawBoard(gl , 0 , -2 , 0 , 8);
 //
@@ -227,13 +261,12 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int x = e.getX() , y = e.getY();
-//        Component c = e.getComponent();
-//        int width = c.getWidth() , height = c.getHeight();
-//        xposition = (int) (x / width * 800) - 800;
-//        yposition =  600 - (int) (y / height * 600);
-//        System.out.println(xposition + " " + yposition);
-        System.out.println(x + " " + y);
+        double x = e.getX() , y = e.getY();
+        Component c = e.getComponent();
+        double width = c.getWidth() , height = c.getHeight();
+        xposition = (int) (x - (width / 2));
+        yposition = (int) ((height / 2) - y);
+        handleMousePosition();
     }
 
     @Override
