@@ -172,8 +172,6 @@ public class Connect4 extends JFrame implements ActionListener{
         } else if (e.getSource().equals(Button5)) {
             System.exit(0);
         }
-
-
     }
     public class SecondaryFrame extends JFrame implements ActionListener{
 
