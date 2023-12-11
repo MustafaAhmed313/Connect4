@@ -71,6 +71,7 @@ public class Connect4 extends JFrame implements ActionListener{
         jPanel2.setBackground(Color.gray);
         jPanel2.setLayout(null);
         jPanel2.setBounds(0, 20, 700, 300);
+
         add(jPanel);
 
         jPanel.setLayout(null);
