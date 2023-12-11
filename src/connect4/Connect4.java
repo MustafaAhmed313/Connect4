@@ -4,6 +4,8 @@
  */
 package connect4;
 
+import javax.sound.sampled.*;
+
 import connect4.Listeners.*;
 import connect4.GameEngine.*;
  
@@ -15,6 +17,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
+import java.io.IOException;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.border.Border;
 
 
@@ -42,6 +47,8 @@ public class Connect4 extends JFrame implements ActionListener{
 
 
     public Connect4() {
+        
+        
 
         setBackground(Color.gray);
 
@@ -49,7 +56,7 @@ public class Connect4 extends JFrame implements ActionListener{
         Button1 = new JButton("Single player");
         Button2 = new JButton("Multi player");
         Button3 = new JButton("High Score");
-        Button4 = new JButton("Sitings");
+        Button4 = new JButton("Settings");
         Button5 = new JButton("Exit");
         jPanel = new JPanel();
         jPanel2 = new JPanel();
@@ -138,19 +145,37 @@ public class Connect4 extends JFrame implements ActionListener{
     }
 
 
-    public static void main(String[] args) {
-        new Connect4();
+    public static void main(String[] args) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+        
+//          File file =new File("Carefree(chosic.com) (1) (1).wav");
+//        AudioInputStream audioStream =AudioSystem.getAudioInputStream(file);
+//        Clip clip =AudioSystem.getClip();
+//        clip.open(audioStream);
+//
+//
+//
+//       new Connect4();
+//        clip.start();
+        
+            new Connect4();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(Button1)) {
+           user.setNumPlayer(1);
     new SecondaryFrame();
 
-        } else if (e.getSource().equals(Button4)) {
+        } else if (e.getSource().equals(Button2)) {
+            user.setNumPlayer(2);
+     new MultiPlayerFrame();
 
-
-        } else if (e.getSource().equals(Button5)) {
+        }
+        else if(e.getSource().equals(Button4)){
+        new settings();
+        }
+        
+        else if (e.getSource().equals(Button5)) {
             System.exit(0);
         }
     }
@@ -281,7 +306,9 @@ public class Connect4 extends JFrame implements ActionListener{
                 user.setLevel(3);
                  }
             else if(e.getSource().equals(themButton)){
-                user.setUsername(text.getText());
+                if(user.getNumPlayer()==1){
+                user.setUsername(text.getText());}
+               
                 new ThemesJFrame() ;
             }
 
@@ -289,12 +316,19 @@ public class Connect4 extends JFrame implements ActionListener{
     }
     public class ThemesJFrame extends JFrame implements ActionListener{
 
+         
+      
         private final JPanel themepanel1;
         private final JPanel themepanel2;
         private final JPanel themepanel3;
         private final JPanel themepanel4;
         private final JRadioButton them1 ;
         private final JRadioButton them2 ;
+        
+        private final GLCanvas gLCanvas2 ;
+        private final GLCanvas gLCanvas3;
+        private final GameEventListner2 listner2 = new GameEventListner2();
+        private final GameEventListner3 listner3 =new GameEventListner3();
 
         private final ButtonGroup themeGroup ;
         private final JButton play ;
@@ -302,17 +336,25 @@ public class Connect4 extends JFrame implements ActionListener{
 
 
         public ThemesJFrame(){
-
+             
             SecondaryFrame s=new SecondaryFrame();
             themepanel1 = new JPanel() ;
             themepanel2 =new JPanel() ;
             themepanel3 =new JPanel() ;
             themepanel4 =new JPanel() ;
 
+           
+             
+            gLCanvas2 = new GLCanvas();
+            gLCanvas3  =new GLCanvas();
+            
+            gLCanvas2.addGLEventListener(listner2);
+            gLCanvas3.addGLEventListener(listner3);
+          
             setLayout(null);
-
+            
             themepanel1.setBounds(0,5,800,70);
-            add(themepanel1) ;
+             add(themepanel1) ;
 
             them1 = new JRadioButton("Basic Theme") ;
             them1.setBounds(350,10,150,55);
@@ -321,10 +363,12 @@ public class Connect4 extends JFrame implements ActionListener{
             them1.setFont(r);
 
 
-            themepanel2 .setBounds(0,75,800,260);
-            add(themepanel2) ;
+            themepanel2 .setBounds(0,70,800,275);
+             add(themepanel2) ;
+            themepanel2.setLayout(new GridLayout(1,1));
+            themepanel2.add(gLCanvas2);      //
 
-            themepanel3.setBounds(0,340,800,60);
+            themepanel3.setBounds(0,360,800,60);
             add(themepanel3);
 
             them2 =new JRadioButton("Ice And Fire") ;
@@ -334,17 +378,21 @@ public class Connect4 extends JFrame implements ActionListener{
             Font r2 = new Font(them2.getFont().getName(), Font.ITALIC, 20);
             them2.setFont(r2);
 
-            themepanel4.setBounds(0,470,600,260);
-            add(themepanel4);
+            themepanel4.setBounds(0,430,800,280);
+             add(themepanel4);
+            themepanel4.setLayout(new GridLayout(1,1));
+            themepanel4.add(gLCanvas3);
+            
 
 
             play = new JButton("Play");
             add(play);
-            play.setBounds(350,740,150,40);
+            play.setBounds(330,740,150,40);
 
             Font pl = new Font(play.getFont().getName(), Font.BOLD, 20);
             play.setFont(pl);
             play.addActionListener(this);
+            play.setBackground(Color.CYAN);
 
 
             them1.addActionListener(this);
@@ -365,7 +413,15 @@ public class Connect4 extends JFrame implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource().equals(play)){
-                System.out.println(user.username +"  "+user.level  +" "+user.design);
+                if(user.getNumPlayer()==1){
+                System.out.println(user.getNumPlayer()+" "+user.getUsername() +"  "+user.getLevel()  +" "+user.getDesign());
+            }
+               
+              else if(user.getNumPlayer()==2){
+                  user.setLevel(0);
+                System.out.println(user.getNumPlayer()+" "+user.getName1()+" "+user.getName2() + " "+user.getDesign());
+            }
+            
             }
            if(e.getSource().equals(them1)){
                user.setDesign(1);
@@ -379,5 +435,144 @@ public class Connect4 extends JFrame implements ActionListener{
 
         }
     }
+    
 
+     public class MultiPlayerFrame extends JFrame implements ActionListener{
+     
+         private final JButton themButton;
+         private final JLabel  label1;
+         private final JLabel  label2;
+         private final JTextField text1;
+         private final JTextField text2;
+         
+         
+         public MultiPlayerFrame(){
+             
+             setLayout(null);
+             
+              themButton = new JButton("Themes") ;
+            add(themButton);
+            themButton.setBounds(110,300,150,50);
+
+            Font them = new Font(themButton.getFont().getName(), Font.BOLD, 20);
+            themButton.setFont(them);
+            themButton.setBackground(Color.CYAN);
+            themButton.addActionListener(this);
+
+            label1 = new JLabel("UserName1");
+              label1.setBounds(120,5,120,50);
+           add(label1);
+            Font l2 = new Font(label1.getFont().getName(), Font.BOLD, 20);
+            label1.setFont(l2);
+            label1.setBackground(Color.lightGray);
+            label1.setOpaque(true);
+
+            Border border1 = BorderFactory.createLineBorder(Color.BLACK, 2);
+            label1.setBorder(border1);
+
+            text1 = new JTextField();
+            text1.setPreferredSize(new Dimension(150, 30));
+            text1.setBounds(110,  70,  150,  30);
+             add(text1);
+
+            
+            
+            
+            label2 = new JLabel("UserName2 ");
+               label2.setBounds(120,120,120,50);
+           add(label2);
+            Font l = new Font(label2.getFont().getName(), Font.BOLD, 20);
+            label2.setFont(l);
+            label2.setBackground(Color.lightGray);
+            label2.setOpaque(true);
+
+            Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
+            label2.setBorder(border);
+
+                        text2 = new JTextField();
+            text2.setPreferredSize(new Dimension(150, 30));
+            text2.setBounds(110,  185,  150,  30);
+             add(text2);
+
+            
+            
+          
+            setTitle(" MultiPlayer");
+            setSize(400, 400);
+            setLocationRelativeTo(this);
+            setVisible(true);
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+     }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        
+            if(e.getSource().equals(themButton)){
+                if(user.getNumPlayer() == 2){
+                user.setName1(text1.getText());
+                user.setName2(text2.getText());
+                }
+            new  ThemesJFrame();
+            }
+        }
+    }
+     public class settings extends JFrame implements ActionListener{
+         private final JLabel volumSettings ;
+         private final JToggleButton toggle;
+          private final JToggleButton toggle1;
+         private final JLabel backgroundsound;
+         private final JLabel gamesound ;
+         
+         public settings(){
+             setLayout(null);
+             volumSettings = new JLabel("Settings of Sound");
+             add(volumSettings);
+             volumSettings.setBounds(120, 10, 180, 40);
+               Font l2 = new Font(volumSettings.getFont().getName(), Font.BOLD, 20);
+             volumSettings.setFont(l2);
+            volumSettings.setBackground(Color.lightGray);
+            volumSettings.setOpaque(true);
+         
+            backgroundsound = new JLabel("Background Sound");
+             add(backgroundsound);
+             backgroundsound.setBounds(5,60,150,40 );
+             Font v = new Font( backgroundsound .getFont().getName(), Font.BOLD, 14);
+              backgroundsound.setFont( v);
+              
+            toggle = new JToggleButton("ON / OF");
+             add(toggle);
+             toggle.setBounds(200, 70, 80, 30);
+            
+             
+              gamesound = new JLabel("Game sound");
+             add(gamesound);
+             gamesound.setBounds(5,125,150,40 );
+             Font g = new Font( gamesound .getFont().getName(), Font.BOLD, 14);
+              gamesound.setFont( g);
+              
+             toggle1 =new JToggleButton("ON / OF");
+             add(toggle1);
+             toggle1.setBounds(200,135,80,30);
+             
+             
+             
+          setTitle("settings");
+            setSize(400, 400);
+            setLocationRelativeTo(this);
+            setVisible(true);
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+         }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        if(e.getSource().equals(toggle)){
+        user.setBackSound(0);
+        }
+        else if(e.getSource().equals(toggle1)){
+        user.setGameSound(0);
+        }
+        }
+        
+     
+     }
 }
