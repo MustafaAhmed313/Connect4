@@ -1,6 +1,6 @@
 package connect4.Frames;
 
-import Listeners.GameBackGroundListener;
+import connect4.Listeners.GameBackGroundListener;
 import com.sun.opengl.util.Animator;
 import com.sun.opengl.util.FPSAnimator;
 import connect4.Listeners.Connect4Listener;
@@ -25,7 +25,7 @@ public class GameFrame extends JFrame {
         glCanvas.addKeyListener(listeners);
         glCanvas.addMouseListener(listeners);
         addKeyListener(listeners);
-        addMouseListener(listeners);
+        //addMouseListener(listeners);
 
         animate = new FPSAnimator(15); //Initialize Animator Object
         animate.add(glCanvas);
@@ -36,6 +36,7 @@ public class GameFrame extends JFrame {
         ViewBoard.setLayout(new GridLayout(1 , 1));
         ViewBoard.add(glCanvas);
         ViewBoard.setBounds(0 , 0,  800 , 600);
+        ViewBoard.addMouseListener(listeners);
         add(ViewControl);
         ViewControl.setSize(200 , 600);
         ViewControl.setLayout(null);
