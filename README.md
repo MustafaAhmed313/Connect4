@@ -114,7 +114,7 @@
 
 - [ ] Sound [Accepted] `Elkhouly>
 	- [ ] turn on/off background sound
-	- [ ] sound for the main frame menu
+	- [X] sound for the main frame menu
 	- [ ] sound for the normal scene
 	- [ ] sound for the dragon scene
 	- [ ] ratio input controls the sound volume
