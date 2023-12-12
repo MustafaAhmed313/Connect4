@@ -105,4 +105,13 @@ public class Engine {
         public void switchPlayer() {
             currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
         }
+        
+        public int score (){
+            Long start_time = 0L, end_time = 0L;
+            start_time = System.currentTimeMillis();
+            if (checkWin()) {
+                end_time = System.currentTimeMillis();    
+            }
+        return (int) (end_time-start_time)/1000;
+        }
 }
