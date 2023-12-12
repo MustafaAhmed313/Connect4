@@ -7,19 +7,12 @@ package connect4;
 
 import connect4.Frames.MainFrame;
 
-<<<<<<< HEAD
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.TargetDataLine;
-import java.io.File;
 
 /**
  *
  * @author mosta
  */
-=======
->>>>>>> bb6708a0cff512359856465fd1ce0de69fc6cda7
+
 public class Connect4 {
     public static void main(String[] args) {
         try {
