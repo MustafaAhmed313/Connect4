@@ -29,12 +29,12 @@
     - [ ] detect coordintes for mouse clicking
     - [ ] identify the range of the stop zone for the tuple
 
-- [ ] Level Up [Accepted] `Mustafa Ahmed , Ahmed Ezzeldeen`
-    - [ ] Level Easy play with random logic
+- [X] Level Up [Accepted] `Mustafa Ahmed , Ahmed Ezzeldeen`
+    - [X] Level Easy play with random logic
     - [ ] Level Medium play with detect the nearest column for the last tuple
     - [ ] Level Hard Play with Ai (MinMax Algorithm)
 
-- [ ] Pause [Accepted] `Elkhouly`
+- [X] Pause [Accepted] `Elkhouly`
     - [ ] pause logic when to stop the animator for not to display the scene at a moment (Freezing)
 
 - [X] Menu [Accepted] `ElKhouly`
@@ -54,73 +54,69 @@
 - [ ] Score [Accepted] `Khafagy`
     - [ ] Store the time of the finished game for the user
 
-- [ ] Randomness [Accepted] `Khafagy>
-    - [ ] Level Easy Logic random index for the columns if their available (< 6 tuples)
+- [X] Randomness [Accepted] `Khafagy>
+    - [x] Level Easy Logic random index for the columns if their available (< 6 tuples)
 
-- [ ] AI [Accepted] `Mustafa Ahmed`
-	- [ ] Level Hard Logic MinMax Algorithm (Backtracking)
+- [X] AI [Accepted] `Mustafa Ahmed`
+	- [X] Level Hard Logic MinMax Algorithm (Backtracking)
 
 - [X] Username [Accepted] `Elkhouly`
 	- [X] input for single player mode
 	- [X] input for Multiplayer mode
 	- [X] input for AI mode
 
-- [ ] Collision [Accepted] `Ahmed Ezzeldeen`
-	- [ ] tuple lied down from above and rest in some empty shape which is above other tuple or is the first one
+- [X] Collision [Accepted] `Ahmed Ezzeldeen`
+	- [X] tuple lied down from above and rest in some empty shape which is above other tuple or is the first one
 
 - [ ] Lives [Denied]
 
-- [ ] Graphics [Accepted] `Ahmed Ezzeleen , Elkhouly`
-	- [ ] Normal tuple style (red , yellow)
-	- [ ] Dragon tuple style (white black , red black)
-	- [ ] The Board of tuples (blue)
-	- [ ] Background for the normal scene
-	- [ ] Background for the dragon scene
-	- [ ] Light player switch turns
-	- [ ] pause button
+- [X] Graphics [Accepted] `Ahmed Ezzeleen , Elkhouly`
+	- [X] Normal tuple style (red , yellow)
+	- [X] Dragon tuple style (white black , red black)
+	- [X] The Board of tuples (blue)
+	- [X] Background for the normal scene
+	- [X] Background for the dragon scene
+	- [X] pause button
 
 - [ ] 3D [Denied]
 
-- [ ] GUI [Accepted] `Ahmed Ezzeldeen , Elkhouly`
+- [X] GUI [Accepted] `Ahmed Ezzeldeen , Elkhouly`
 	- [X] Main Frame
 	- [X] Input Frame
-	- [ ] Themes Frame
-	- [ ] Settings Frame
-	- [ ] Hight Scores Frame
-	- [ ] Game Frame
+	- [X] Themes Frame
+	- [X] Settings Frame
+	- [ ] High Scores Frame
+	- [X] Game Frame
 
 - [ ] Clean Code [Accepted] `ALL`
-	- [ ] Camel Case Variables [ex: thisVariable]
-	- [ ] no nested classes
-	- [ ] solid principles
-	- [ ] meaningful usage of the classes and when to use
-	- [ ] abstraction (As you can!)
+	- [X] Camel Case Variables [ex: thisVariable]
+	- [X] no nested classes
+	- [X] solid principles
+	- [X] meaningful usage of the classes and when to use
+	- [X] abstraction (As you can!)
 
-- [ ] OOCode [Accepted] `ALL`
-	- [ ] game engine class
-	- [ ] gleventlistener class
-	- [ ] tuple class
-	- [ ] AI class
-	- [ ] settings class
-	- [ ] Game Views Controller
+- [X] OOCode [Accepted] `ALL`
+	- [X] game engine class
+	- [X] gleventlistener class
+	- [X] tuple class
+	- [X] settings class
+	- [X] Game Views Controller
 
-- [ ] Smooth Controls [Accepted] `Ahmed Ezzeldeen , Yousef Amir`
+- [X] Smooth Controls [Accepted] `Ahmed Ezzeldeen , Yousef Amir`
 	- [X] mouse controls
-	- [ ] keypad controls
 	
 - [ ] High Scores [Accepted] `Khafagy`
 	- [ ] sort the user up to the shortest time they scored for their games
 	- [ ] update the score of the user if he break the score by time shorter than the last score 
 
-- [ ] Sound [Accepted] `Elkhouly`
-	- [ ] turn on/off background sound
+- [X] Sound [Accepted] `Elkhouly`
+	- [X] turn on/off background sound
 	- [X] sound for the main frame menu
-	- [ ] sound for the normal scene
-	- [ ] sound for the dragon scene
-	- [ ] ratio input controls the sound volume
+	- [X] sound for the normal scene
+	- [X] sound for the dragon scene
 
-- [ ] Animation [Accepted] `Mustafa Ahmed , Ezzeldeen , Yousef Amir`
+- [X] Animation [Accepted] `Mustafa Ahmed , Ezzeldeen , Yousef Amir`
 	- [X] tuple lied down with fixed previos state for the previous tuples
 	
-- [ ] Timer [Accepted] `Elkhouly>
+- [ ] Timer [Accepted] `Elkhouly`>
 	- [ ] time you take to win or lose in the game as a user

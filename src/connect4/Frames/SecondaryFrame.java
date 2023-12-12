@@ -118,7 +118,7 @@ public class SecondaryFrame extends JFrame implements ActionListener {
         else if(e.getSource().equals(themButton)){
             if(user.getNumPlayer()==1){
                 user.setUsername(text.getText());}
-
+                user.setName1(text.getText());
             new ThemesFrame() ;
         }
     }

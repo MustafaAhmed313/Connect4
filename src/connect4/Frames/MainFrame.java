@@ -125,7 +125,6 @@ public class MainFrame extends JFrame implements ActionListener {
             user.setNumPlayer(1);
             Connect4.gameStatus.setMode(1);
             new SecondaryFrame();
-
         } else if (e.getSource().equals(Button2)) {
             user.setNumPlayer(2);
             Connect4.gameStatus.setMode(2);

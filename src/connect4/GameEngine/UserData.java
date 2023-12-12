@@ -14,10 +14,16 @@ public class UserData {
     private int  numPlayer ;
     private int backSound =1;
     private int gameSound =1;
+    private int score = 0;
     private boolean flag = true ;
-     
-    
-    
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public UserData(){
         this.username ="user" ;

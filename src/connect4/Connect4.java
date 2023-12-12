@@ -22,6 +22,5 @@ public class Connect4 {
         }catch (Exception ex) {
             ex.printStackTrace();
         }
-
     }
 }
