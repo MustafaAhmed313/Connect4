@@ -68,6 +68,7 @@ public class MultiPlayerFrame extends JFrame implements ActionListener {
 
 
 
+        setResizable(false);
         setTitle(" MultiPlayer");
         setSize(400, 400);
         setLocationRelativeTo(this);
@@ -83,6 +84,7 @@ public class MultiPlayerFrame extends JFrame implements ActionListener {
                 user.setName1(text1.getText());
                 user.setName2(text2.getText());
             }
+
             new ThemesFrame();
         }
     }
