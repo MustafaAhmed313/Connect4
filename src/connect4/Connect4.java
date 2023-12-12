@@ -6,6 +6,7 @@ package connect4;
 
 import javax.sound.sampled.*;
 
+import connect4.Frames.GameFrame;
 import connect4.Listeners.*;
 import connect4.GameEngine.*;
  
@@ -27,10 +28,10 @@ import javax.swing.border.Border;
  *
  * @author mosta
  */
-public class Connect4 extends JFrame implements ActionListener{
+public class Connect4 extends JFrame implements ActionListener {
 
   
-   UserData user = new UserData() ;
+   static UserData user = new UserData() ;
 
 
     private GLCanvas glCanvas;
@@ -47,7 +48,7 @@ public class Connect4 extends JFrame implements ActionListener{
 
 
     public Connect4() {
-        
+    setResizable(false);
         
 
         setBackground(Color.gray);
@@ -145,19 +146,22 @@ public class Connect4 extends JFrame implements ActionListener{
     }
 
 
-    public static void main(String[] args) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-        
-//          File file =new File("Carefree(chosic.com) (1) (1).wav");
-//        AudioInputStream audioStream =AudioSystem.getAudioInputStream(file);
-//        Clip clip =AudioSystem.getClip();
-//        clip.open(audioStream);
-//
-//
-//
-//       new Connect4();
-//        clip.start();
-        
-            new Connect4();
+    public static void main(String[] args)  {
+
+
+
+
+
+//        File file1 = new File("Heart-Of-The-Ocean(chosic.com).wav");
+//        AudioInputStream audioStream1 =AudioSystem.getAudioInputStream(file1);
+//        Clip clip1 =AudioSystem.getClip();
+//        clip1.open(audioStream);
+
+
+
+
+
+
     }
 
     @Override
@@ -199,6 +203,7 @@ public class Connect4 extends JFrame implements ActionListener{
 
         public SecondaryFrame() {
 
+            setResizable(false);
             setLayout(null);
 
 
@@ -336,6 +341,8 @@ public class Connect4 extends JFrame implements ActionListener{
 
 
         public ThemesJFrame(){
+
+            setResizable(false);
              
             SecondaryFrame s=new SecondaryFrame();
             themepanel1 = new JPanel() ;
@@ -429,6 +436,10 @@ public class Connect4 extends JFrame implements ActionListener{
            else if(e.getSource().equals(them2)){
                user.setDesign(2);
            }
+           else if(e.getSource().equals(play)){
+
+               new GameFrame();
+           }
 
 
 
@@ -449,6 +460,7 @@ public class Connect4 extends JFrame implements ActionListener{
          public MultiPlayerFrame(){
              
              setLayout(null);
+             setResizable(false);
              
               themButton = new JButton("Themes") ;
             add(themButton);
@@ -460,8 +472,8 @@ public class Connect4 extends JFrame implements ActionListener{
             themButton.addActionListener(this);
 
             label1 = new JLabel("UserName1");
-              label1.setBounds(120,5,120,50);
-           add(label1);
+            label1.setBounds(120,5,120,50);
+            add(label1);
             Font l2 = new Font(label1.getFont().getName(), Font.BOLD, 20);
             label1.setFont(l2);
             label1.setBackground(Color.lightGray);
@@ -480,7 +492,7 @@ public class Connect4 extends JFrame implements ActionListener{
             
             label2 = new JLabel("UserName2 ");
                label2.setBounds(120,120,120,50);
-           add(label2);
+            add(label2);
             Font l = new Font(label2.getFont().getName(), Font.BOLD, 20);
             label2.setFont(l);
             label2.setBackground(Color.lightGray);
@@ -516,14 +528,18 @@ public class Connect4 extends JFrame implements ActionListener{
             }
         }
     }
-     public class settings extends JFrame implements ActionListener{
+     public static class settings extends JFrame implements ActionListener{
+
+
          private final JLabel volumSettings ;
          private final JToggleButton toggle;
           private final JToggleButton toggle1;
          private final JLabel backgroundsound;
          private final JLabel gamesound ;
+         private final JButton apply ;
          
          public settings(){
+             setResizable(false);
              setLayout(null);
              volumSettings = new JLabel("Settings of Sound");
              add(volumSettings);
@@ -554,7 +570,14 @@ public class Connect4 extends JFrame implements ActionListener{
              add(toggle1);
              toggle1.setBounds(200,135,80,30);
              
-             
+
+             apply = new JButton("Apply");
+             apply.setBounds(150,300,100,50);
+             add(apply);
+
+
+
+
              
           setTitle("settings");
             setSize(400, 400);
@@ -570,6 +593,11 @@ public class Connect4 extends JFrame implements ActionListener{
         }
         else if(e.getSource().equals(toggle1)){
         user.setGameSound(0);
+        }
+        else if(e.getSource().equals(apply)){
+            if(user.getBackSound()==0)
+                user.setFlag(false);
+
         }
         }
         
