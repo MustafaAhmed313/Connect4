@@ -25,7 +25,7 @@ public class Connect4 {
 
     public static void main(String[] args) {
         try {
-            File file = new File("E:\\Java projects\\Connect4\\src\\connect4\\Assets\\Carefree(chosic.com).wav"); //////////////////////////////
+            File file = new File("E:\\Connect4\\src\\connect4\\Assets\\Carefree(chosic.com).wav"); //////////////////////////////
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
             clip = AudioSystem.getClip();
             clip.open(audioStream);
