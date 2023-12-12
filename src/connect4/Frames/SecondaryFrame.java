@@ -86,7 +86,7 @@ public class SecondaryFrame extends JFrame implements ActionListener {
 
         Font them = new Font(themButton.getFont().getName(), Font.BOLD, 20);
         themButton.setFont(them);
-        themButton.setBackground(Color.red);
+        themButton.setBackground(Color.CYAN);
         themButton.addActionListener(this);
 
         radio1.addActionListener(this);
@@ -104,19 +104,21 @@ public class SecondaryFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(radio1)){
+            Connect4.gameStatus.setLevel(1);
             user.setLevel(1);
         }
-
         else if(e.getSource().equals(radio2)) {
+            Connect4.gameStatus.setLevel(2);
             user.setLevel(2);
         }
         else if(e.getSource().equals(radio3)) {
+            Connect4.gameStatus.setLevel(3);
             user.setLevel(3);
         }
         else if(e.getSource().equals(themButton)){
             if(user.getNumPlayer()==1){
                 user.setUsername(text.getText());}
-
+                user.setName1(text.getText());
             new ThemesFrame() ;
         }
     }

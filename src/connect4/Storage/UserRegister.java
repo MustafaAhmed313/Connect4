@@ -11,7 +11,7 @@ public class UserRegister {
             BufferedWriter writer = new BufferedWriter(
                     new FileWriter(filename , true)
             );
-            writer.append(user.getUsername() + ":" + user.getLevel() + "\n");
+            writer.append(user.getUsername() + ":" + user.getLevel() + ":" + user.getScore() + "\n");
             writer.close();
         }catch (IOException ex) {
             ex.printStackTrace();
