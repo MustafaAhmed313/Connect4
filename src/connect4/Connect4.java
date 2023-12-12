@@ -6,6 +6,7 @@ package connect4;
 
 
 import connect4.Frames.MainFrame;
+import connect4.Storage.GameStatus;
 
 
 /**
@@ -14,6 +15,7 @@ import connect4.Frames.MainFrame;
  */
 
 public class Connect4 {
+    public static GameStatus gameStatus = new GameStatus();
     public static void main(String[] args) {
         try {
             new MainFrame();
