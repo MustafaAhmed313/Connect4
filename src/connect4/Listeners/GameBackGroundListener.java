@@ -13,7 +13,11 @@ import connect4.Frames.Player_One_Win;
 import connect4.Frames.Player_Two_Win;
 import connect4.GameEngine.Pog;
 import connect4.Texture.TextureReader;
+<<<<<<< HEAD
 import connect4.GameEngine.gameEngineMulti;
+=======
+import connect4.GameEngine.*;
+>>>>>>> 78a3aef2fa420248f0072a5e604d6f5c6e2cbf97
 
 import java.awt.*;
 import java.awt.event.*;
@@ -31,9 +35,10 @@ public class GameBackGroundListener extends JFrame
         implements GLEventListener, MouseListener, KeyListener, ActionListener, MouseMotionListener {
     int maxWidth = 100; // Initial Positions
     int maxHeight = 100;
-    int xposition = 0, yposition = 0;
-    ArrayList<Pog> listOfPogs;
-    int currentPog = 0;
+    GL gl;
+    int xposition = 0 , yposition = 0;
+    int [] arr = {6,6,6,6,6,6,6};
+    int animationIndex = 0;
 
     int row = 5;
 
@@ -246,35 +251,26 @@ public class GameBackGroundListener extends JFrame
         return keyBits.get(keyCode);
     }
 
-    private void handleMousePosition() {
-        if (xposition >= -271 && xposition <= -210) {
-            nextColumnIndex = 0;
-            x = -60;
-        }
-        if (xposition >= -191 && xposition <= -130) {
-            nextColumnIndex = 1;
-            x = -40;
-        }
-        if (xposition >= -112 && xposition <= -51) {
-            nextColumnIndex = 2;
-            x = -20;
-        }
-        if (xposition >= -32 && xposition <= 29) {
-            nextColumnIndex = 3;
-            x = 0;
-        }
-        if (xposition >= 47 && xposition <= 109) {
-            nextColumnIndex = 4;
-            x = 20;
-        }
-        if (xposition >= 128 && xposition <= 188) {
-            nextColumnIndex = 5;
-            x = 40;
-        }
-        if (xposition >= 207 && xposition <= 269) {
-            nextColumnIndex = 6;
-            x = 60;
-        }
+
+    @Override
+    public void display(GLAutoDrawable glAutoDrawable) {
+
+        GL gl = glAutoDrawable.getGL();
+        gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
+        gl.glLoadIdentity();
+
+        drawBackground(gl);
+//
+//        handleKeyPress();
+
+        drawSprite(gl , xposition , yposition , 1 , 1);
+
+//
+        drawBoard(gl , 0 , -2 , 0 , 8);
+//
+
+
+
     }
 
     @Override
@@ -294,50 +290,15 @@ public class GameBackGroundListener extends JFrame
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        double x = e.getX(), y = e.getY();
-        Component c = e.getComponent();
-        double width = c.getWidth(), height = c.getHeight();
-        xposition = (int) (x - (width / 2));
-        yposition = (int) ((height / 2) - y);
-        System.out.println("x : " + xposition + " y : " + yposition);
-        handleMousePosition();
-        if (currentPog < listOfPogs.size() && game.dropToken(nextColumnIndex)) {
-            game.switchPlayer();
-            int r = game.indexMove(nextColumnIndex);
-            game.printBoard();
-            if (game.checkWin()) {
-                if (game.getCurrentPlayer() == 'X'){
-                    new Player_One_Win();
-                }else {
-                    new Player_Two_Win();
-                }
-            }
-            dropPogTo(r, currentPog); // TODO: check if i can drop here or no ^^
-        }
-    }
+         xposition = e.getX();
+         yposition = e.getY();
+//        Component c = e.getComponent();
+//        int width = c.getWidth() , height = c.getHeight();
+//        xposition = (int) (x / width * 800) - 800;
+//        yposition =  600 - (int) (y / height * 600);
+//        System.out.println(xposition + " " + yposition);
+        System.out.println(xposition + " " + yposition);
 
-    private void dropPogTo(int r, int current) {
-        int minHeight = -50;
-        // -50 // row= 6
-        // -30 // row= 5
-        // -10 // row= 4
-        // 20  // row= 3
-        // 40  // row= 2
-        // 60  // row= 1
-        // 80  // row= 0
-        System.out.println("the row : " + r);
-        switch (r){
-            case 5: minHeight = baseSpace; break;
-            case 4: minHeight = baseSpace + spaceIn; break;
-            case 3: minHeight = baseSpace + (spaceIn*2); break;
-            case 2: minHeight = baseSpace + (spaceIn*3); break;
-            case 1: minHeight = baseSpace + (spaceIn*4); break;
-            case 0: minHeight = baseSpace + (spaceIn*5); break;
-        }
-        Pog ele = listOfPogs.get(current);
-        ele.setMinHeight(minHeight);
-        ele.setDrop(true);
-        currentPog++;
     }
 
     @Override
