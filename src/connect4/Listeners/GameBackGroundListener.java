@@ -28,9 +28,16 @@ public class GameBackGroundListener
         implements GLEventListener, MouseListener, KeyListener, ActionListener, MouseMotionListener {
     int maxWidth = 100; // Initial Positions
     int maxHeight = 100;
+<<<<<<< HEAD
+    GL gl;
+    int xposition = 0 , yposition = 0;
+    int [] arr = {6,6,6,6,6,6,6};
+    int animationIndex = 0;
+=======
     int xposition = 0, yposition = 0;
     ArrayList<Pog> listOfPogs;
     int currentPog = 0;
+>>>>>>> 343c2efe9d71b5a66c68c3eccad874128343b9d3
 
     int row = -50;
     // -50 // row= 5
@@ -237,6 +244,28 @@ public class GameBackGroundListener
         return keyBits.get(keyCode);
     }
 
+<<<<<<< HEAD
+
+    @Override
+    public void display(GLAutoDrawable glAutoDrawable) {
+
+        GL gl = glAutoDrawable.getGL();
+        gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
+        gl.glLoadIdentity();
+
+        drawBackground(gl);
+//
+//        handleKeyPress();
+
+        drawSprite(gl , xposition , yposition , 1 , 1);
+
+//
+        drawBoard(gl , 0 , -2 , 0 , 8);
+//
+
+
+
+=======
     private void handleMousePosition() {
         if (xposition >= -271 && xposition <= -210) {
             nextColumnIndex = 0;
@@ -266,6 +295,7 @@ public class GameBackGroundListener
             nextColumnIndex = 6;
             x = 60;
         }
+>>>>>>> 343c2efe9d71b5a66c68c3eccad874128343b9d3
     }
 
     @Override
@@ -285,6 +315,17 @@ public class GameBackGroundListener
 
     @Override
     public void mouseClicked(MouseEvent e) {
+<<<<<<< HEAD
+         xposition = e.getX();
+         yposition = e.getY();
+//        Component c = e.getComponent();
+//        int width = c.getWidth() , height = c.getHeight();
+//        xposition = (int) (x / width * 800) - 800;
+//        yposition =  600 - (int) (y / height * 600);
+//        System.out.println(xposition + " " + yposition);
+        System.out.println(xposition + " " + yposition);
+
+=======
         double x = e.getX(), y = e.getY();
         Component c = e.getComponent();
         double width = c.getWidth(), height = c.getHeight();
@@ -302,6 +343,7 @@ public class GameBackGroundListener
         ele.setMinHeight(minHeight);
         ele.setDrop(true);
         currentPog++;
+>>>>>>> 343c2efe9d71b5a66c68c3eccad874128343b9d3
     }
 
     @Override
