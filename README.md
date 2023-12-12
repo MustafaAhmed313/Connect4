@@ -1,10 +1,10 @@
 # Project Tasks
 
-- [ ] Multiplayer [Accepted] `Mustafa Ahmed , Yousef Amir`
-  - [ ] player 1 or 2 have turns automaticaly by a flag
-  - [ ] 2 inputs for the two players
-  - [ ] 2 scores for 2 players
-  - [ ] 2 stored data for 2 players
+- [X] Multiplayer [Accepted] `Mustafa Ahmed , Yousef Amir`
+  - [X] player 1 or 2 have turns automaticaly by a flag
+  - [X] 2 inputs for the two players
+  - [X] 2 scores for 2 players
+  - [X] 2 stored data for 2 players
 
 - [ ] BugFree [Accepted] `Mustafa Ahmed , Ezzeldeen`
   - [ ] Testing
@@ -17,33 +17,33 @@
 	- [ ] dynamic open/close frames
 	- [ ] files errors (try,catch,finally)
 
-- [ ] Instructions [Accepted] `ALL`
-    - [ ] win-lose
-    - [ ] player turn
-    - [ ] save the state in the game engine
-    - [ ] multiplayer turns
-    - [ ] single player turns
-    - [ ] AI player turns
-    - [ ] storage file for the users and their scores
-    - [ ] detect stop point of a tuple in vertical coordinates
-    - [ ] detect coordintes for mouse clicking
-    - [ ] identify the range of the stop zone for the tuple
+- [X] Instructions [Accepted] `ALL`
+    - [X] win-lose
+    - [X] player turn
+    - [X] save the state in the game engine
+    - [X] multiplayer turns
+    - [X] single player turns
+    - [X] AI player turns
+    - [X] storage file for the users and their scores
+    - [X] detect stop point of a tuple in vertical coordinates
+    - [X] detect coordintes for mouse clicking
+    - [X] identify the range of the stop zone for the tuple
 
 - [X] Level Up [Accepted] `Mustafa Ahmed , Ahmed Ezzeldeen`
     - [X] Level Easy play with random logic
-    - [ ] Level Medium play with detect the nearest column for the last tuple
-    - [ ] Level Hard Play with Ai (MinMax Algorithm)
+    - [X] Level Medium play with detect the nearest column for the last tuple
+    - [X] Level Hard Play with Ai (MinMax Algorithm)
 
 - [X] Pause [Accepted] `Elkhouly`
-    - [ ] pause logic when to stop the animator for not to display the scene at a moment (Freezing)
+    - [X] pause logic when to stop the animator for not to display the scene at a moment (Freezing)
 
 - [X] Menu [Accepted] `ElKhouly`
     - [X] Single Player Button
     - [X] MultiPlayer Button
     - [ ] High Scores Button
-    - [ ] Settings Button
+    - [X] Settings Button
     - [X] Exit Button
-    - [ ] Game Background and Sound
+    - [X] Game Background and Sound
 
 - [X] Win-Lose [Accepted] `Yousef Amir`
     - [X] game engine logic 4 consecutive tuples
