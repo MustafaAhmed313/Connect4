@@ -19,38 +19,39 @@ import java.util.BitSet;
  *
  * @author moham
  */
-public class GameEventListener3 implements GLEventListener , KeyListener {
-    int maxWidth = 100; //Initial Positions
+public class GameEventListener3 implements GLEventListener, KeyListener {
+    int maxWidth = 100; // Initial Positions
     int maxHeight = 100;
-    int xposition = 0 , yposition = 0;
+    int xposition = 0, yposition = 0;
 
-    int x = 0 , y = 0;
-    String[] textureNames = {"Bord-2.png" , "POG-fire.png" , "POG-ice.png" , "Fire And ICE Text.png" ,  "BG-2.png"}; //The Sprits
+    int x = 0, y = 0;
+    String[] textureNames = { "Bord-2.png", "POG-fire.png", "POG-ice.png", "Fire And ICE Text.png", "BG-2.png" }; // The
+                                                                                                                  // Sprits
     TextureReader.Texture[] texture = new TextureReader.Texture[textureNames.length];
     int textureIndex[] = new int[textureNames.length];
 
     @Override
     public void init(GLAutoDrawable glAutoDrawable) {
-        GL gl = glAutoDrawable.getGL(); //This Will Clear The Background Color To Black
+        GL gl = glAutoDrawable.getGL(); // This Will Clear The Background Color To Black
         gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
         // [New Part Of Code] {-->
 
-        gl.glEnable(GL.GL_TEXTURE_2D);  // Enable Texture Mapping
+        gl.glEnable(GL.GL_TEXTURE_2D); // Enable Texture Mapping
         gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
 
-        //number of textures,array to hold the indeces
+        // number of textures,array to hold the indeces
         gl.glGenTextures(textureNames.length, textureIndex, 0);
 
-        for (int i = 0; i < textureNames.length ; i++) {
+        for (int i = 0; i < textureNames.length; i++) {
             try {
                 String assetsFolderName = "Connect4//Assets";
                 texture[i] = TextureReader.readTexture(assetsFolderName + "//" + textureNames[i], true);
                 gl.glBindTexture(GL.GL_TEXTURE_2D, textureIndex[i]);
 
-                //mipmapsFromPNG(gl, new GLU(), texture[i]);
+                // mipmapsFromPNG(gl, new GLU(), texture[i]);
 
-                //<--}
+                // <--}
 
                 new GLU().gluBuild2DMipmaps(
                         GL.GL_TEXTURE_2D,
@@ -60,35 +61,35 @@ public class GameEventListener3 implements GLEventListener , KeyListener {
                         GL.GL_UNSIGNED_BYTE,
                         texture[i].getPixels() // Imagedata
                 );
-            } catch( IOException e ) {
+            } catch (IOException e) {
                 System.out.println(e);
                 e.printStackTrace();
             }
         }
     }
 
-    private void drawBackground(GL gl){
-        gl.glEnable(GL.GL_BLEND);	// Turn Blending On
+    private void drawBackground(GL gl) {
+        gl.glEnable(GL.GL_BLEND); // Turn Blending On
         gl.glBindTexture(GL.GL_TEXTURE_2D, textureIndex[textureNames.length - 1]);
 
         gl.glBegin(GL.GL_QUADS);
         // Front Face
-        gl.glTexCoord2f(0.0f, 0.0f); //Mix Image Coordinates with Mask Coordinates
-        gl.glVertex3f(-1.0f, -1.0f, -1.0f); //drawMask
-        gl.glTexCoord2f(1.0f, 0.0f); //Mix Image Coordinates with Mask Coordinates
-        gl.glVertex3f(1.0f, -1.0f, -1.0f); //drawMask
-        gl.glTexCoord2f(1.0f, 1.0f); //Mix Image Coordinates with Mask Coordinates
-        gl.glVertex3f(1.0f, 1.0f, -1.0f); //drawMask
-        gl.glTexCoord2f(0.0f, 1.0f); //Mix Image Coordinates with Mask Coordinates
-        gl.glVertex3f(-1.0f, 1.0f, -1.0f); //drawMask
+        gl.glTexCoord2f(0.0f, 0.0f); // Mix Image Coordinates with Mask Coordinates
+        gl.glVertex3f(-1.0f, -1.0f, -1.0f); // drawMask
+        gl.glTexCoord2f(1.0f, 0.0f); // Mix Image Coordinates with Mask Coordinates
+        gl.glVertex3f(1.0f, -1.0f, -1.0f); // drawMask
+        gl.glTexCoord2f(1.0f, 1.0f); // Mix Image Coordinates with Mask Coordinates
+        gl.glVertex3f(1.0f, 1.0f, -1.0f); // drawMask
+        gl.glTexCoord2f(0.0f, 1.0f); // Mix Image Coordinates with Mask Coordinates
+        gl.glVertex3f(-1.0f, 1.0f, -1.0f); // drawMask
         gl.glEnd();
 
         gl.glDisable(GL.GL_BLEND);
     }
 
-    private void drawSprite(GL gl , int x , int y ,  int index , int scale){
+    private void drawSprite(GL gl, int x, int y, int index, int scale) {
         gl.glEnable(GL.GL_BLEND);
-        gl.glBindTexture(GL.GL_TEXTURE_2D, textureIndex[index]);	// Turn Blending On
+        gl.glBindTexture(GL.GL_TEXTURE_2D, textureIndex[index]); // Turn Blending On
 
         gl.glPushMatrix();
 
@@ -96,7 +97,7 @@ public class GameEventListener3 implements GLEventListener , KeyListener {
 
         gl.glScaled(0.1 * scale, 0.1 * scale, 1);
 
-//        System.out.println(x + " " + y);
+        // System.out.println(x + " " + y);
 
         gl.glBegin(GL.GL_QUADS);
         // Front Face
@@ -114,9 +115,9 @@ public class GameEventListener3 implements GLEventListener , KeyListener {
         gl.glDisable(GL.GL_BLEND);
     }
 
-    private void drawBoard(GL gl , int x , int y ,  int index , int scale) {
+    private void drawBoard(GL gl, int x, int y, int index, int scale) {
         gl.glEnable(GL.GL_BLEND);
-        gl.glBindTexture(GL.GL_TEXTURE_2D, textureIndex[index]);	// Turn Blending On
+        gl.glBindTexture(GL.GL_TEXTURE_2D, textureIndex[index]); // Turn Blending On
 
         gl.glPushMatrix();
 
@@ -124,7 +125,7 @@ public class GameEventListener3 implements GLEventListener , KeyListener {
 
         gl.glScaled(0.1 * scale, 0.1 * scale, 1);
 
-//        System.out.println(x + " " + y);
+        // System.out.println(x + " " + y);
 
         gl.glBegin(GL.GL_QUADS);
         // Front Face
@@ -142,7 +143,7 @@ public class GameEventListener3 implements GLEventListener , KeyListener {
         gl.glDisable(GL.GL_BLEND);
     }
 
-    public BitSet keyBits = new BitSet(256); //Key Pressed Detector
+    public BitSet keyBits = new BitSet(256); // Key Pressed Detector
 
     public void handleKeyPress() {
 
@@ -166,14 +167,14 @@ public class GameEventListener3 implements GLEventListener , KeyListener {
 
     @Override
     public void display(GLAutoDrawable glAutoDrawable) {
-        GL gl =glAutoDrawable.getGL();
-        gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
+        GL gl = glAutoDrawable.getGL();
+        gl.glClear(GL.GL_COLOR_BUFFER_BIT); // Clear The Screen And The Depth Buffer
         gl.glLoadIdentity();
         drawBackground(gl);
-        drawBoard(gl , -20 , -20  ,0 , 5);
-        drawSprite(gl , -20 ,  25 , 3 , 2);
-        drawSprite(gl , 30  , 20 , 1 , 2);
-        drawSprite(gl , 30  , -20 , 2 , 2);
+        drawBoard(gl, -20, -20, 0, 5);
+        drawSprite(gl, -20, 25, 3, 2);
+        drawSprite(gl, 30, 20, 1, 2);
+        drawSprite(gl, 30, -20, 2, 2);
     }
 
     @Override

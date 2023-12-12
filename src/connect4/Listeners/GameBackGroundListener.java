@@ -9,9 +9,15 @@ package connect4.Listeners;
  * @author mosta
  */
 
+import connect4.Frames.Player_One_Win;
+import connect4.Frames.Player_Two_Win;
 import connect4.GameEngine.Pog;
 import connect4.Texture.TextureReader;
+<<<<<<< HEAD
+import connect4.GameEngine.gameEngineMulti;
+=======
 import connect4.GameEngine.*;
+>>>>>>> 78a3aef2fa420248f0072a5e604d6f5c6e2cbf97
 
 import java.awt.*;
 import java.awt.event.*;
@@ -23,8 +29,9 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
+import javax.swing.*;
 
-public class GameBackGroundListener
+public class GameBackGroundListener extends JFrame
         implements GLEventListener, MouseListener, KeyListener, ActionListener, MouseMotionListener {
     int maxWidth = 100; // Initial Positions
     int maxHeight = 100;
@@ -32,13 +39,19 @@ public class GameBackGroundListener
     int xposition = 0 , yposition = 0;
     int [] arr = {6,6,6,6,6,6,6};
     int animationIndex = 0;
+<<<<<<< HEAD
     ArrayList<Pog> listOfPogs;
     int currentPog = 0;
+=======
+>>>>>>> 2025b979513b76a8b626375127ea4a1998fd246f
 
-    int row = -50;
+    int row = 5;
+
+    int spaceIn = 22;
+    int baseSpace = -50;
     // -50 // row= 5
     // -30 // row= 4
-    // -10 //
+    // -10 // row= 3
     // 20
     // 40
     // 60
@@ -46,7 +59,9 @@ public class GameBackGroundListener
 
     int x = 0, y = 0;
 
+    static gameEngineMulti game = new gameEngineMulti();
     static int nextColumnIndex = 0;
+
 
     String[] textureNames = { "Bord-1.png", "POG-fire.png", "POG-ice.png", "BG-1.png" }; // The Sprits
 
@@ -74,7 +89,7 @@ public class GameBackGroundListener
         listOfPogs = new ArrayList<>(42);
         for (int i = 0; i < 42; i++) {
             int assetIndex = (i % 2 == 0) ? 1 : 2;
-            Pog ele = new Pog(0, 105, assetIndex, 250);
+            Pog ele = new Pog(0, 110, assetIndex, 250);
             listOfPogs.add(ele);
         }
 
@@ -134,8 +149,9 @@ public class GameBackGroundListener
         for (int i = 0; i < listOfPogs.size(); i++) {
             Pog ele = listOfPogs.get(i);
             int startPoint = ele.getYposition();
-            if (ele.isDrop() && ele.getYposition() > ele.getMinHeight()) {
-                ele.setYposition(--startPoint);
+            if (ele.isDrop() && ele.getYposition() >= ele.getMinHeight()) {
+                startPoint--;
+                ele.setYposition(startPoint);
             }
         }
     }
@@ -240,6 +256,7 @@ public class GameBackGroundListener
         return keyBits.get(keyCode);
     }
 
+<<<<<<< HEAD
     private void handleMousePosition () {
         if (xposition >= -271 && xposition <= -210) {
             nextColumnIndex = 0;
@@ -269,6 +286,28 @@ public class GameBackGroundListener
             nextColumnIndex = 6;
             x = 60;
         }
+=======
+
+    @Override
+    public void display(GLAutoDrawable glAutoDrawable) {
+
+        GL gl = glAutoDrawable.getGL();
+        gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
+        gl.glLoadIdentity();
+
+        drawBackground(gl);
+//
+//        handleKeyPress();
+
+        drawSprite(gl , xposition , yposition , 1 , 1);
+
+//
+        drawBoard(gl , 0 , -2 , 0 , 8);
+//
+
+
+
+>>>>>>> 2025b979513b76a8b626375127ea4a1998fd246f
     }
 
     @Override
@@ -287,6 +326,7 @@ public class GameBackGroundListener
     }
 
     @Override
+<<<<<<< HEAD
     public void mouseClicked (MouseEvent e){
         xposition = e.getX();
         yposition = e.getY();
@@ -301,6 +341,18 @@ public class GameBackGroundListener
         if (currentPog < listOfPogs.size()) {
             dropPogTo(-50, currentPog); // TODO: check if i can drop here or no ^^
         }
+=======
+    public void mouseClicked(MouseEvent e) {
+         xposition = e.getX();
+         yposition = e.getY();
+//        Component c = e.getComponent();
+//        int width = c.getWidth() , height = c.getHeight();
+//        xposition = (int) (x / width * 800) - 800;
+//        yposition =  600 - (int) (y / height * 600);
+//        System.out.println(xposition + " " + yposition);
+        System.out.println(xposition + " " + yposition);
+
+>>>>>>> 2025b979513b76a8b626375127ea4a1998fd246f
     }
 
     @Override
