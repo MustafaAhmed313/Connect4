@@ -1,6 +1,6 @@
 package connect4.Listeners;
 
-import connect4.GameEngine.Engine;
+import connect4.GameEngine.gameEngineMulti;
 import connect4.Texture.TextureReader;
 
 import javax.media.opengl.GL;
@@ -19,7 +19,7 @@ public class GameBackGroundListener2 implements GLEventListener, MouseListener, 
 
     int x = 0, y = 0;
 
-    static Engine game = new Engine();
+    static gameEngineMulti game = new gameEngineMulti();
     static int nextColumnIndex = 0;
 
 

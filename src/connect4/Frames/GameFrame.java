@@ -31,7 +31,7 @@ public class GameFrame extends JFrame  {
         glCanvas.addMouseMotionListener(listeners);
         addKeyListener(listeners);
 
-        animate = new FPSAnimator(15); // Initialize Animator Object
+        animate = new FPSAnimator(60); // Initialize Animator Object
         animate.add(glCanvas);
         animate.start();
 

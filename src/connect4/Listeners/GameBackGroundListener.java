@@ -9,9 +9,11 @@ package connect4.Listeners;
  * @author mosta
  */
 
+import connect4.Frames.Player_One_Win;
+import connect4.Frames.Player_Two_Win;
 import connect4.GameEngine.Pog;
 import connect4.Texture.TextureReader;
-import connect4.GameEngine.Engine;
+import connect4.GameEngine.gameEngineMulti;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -23,8 +25,9 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
+import javax.swing.*;
 
-public class GameBackGroundListener
+public class GameBackGroundListener extends JFrame
         implements GLEventListener, MouseListener, KeyListener, ActionListener, MouseMotionListener {
     int maxWidth = 100; // Initial Positions
     int maxHeight = 100;
@@ -32,10 +35,13 @@ public class GameBackGroundListener
     ArrayList<Pog> listOfPogs;
     int currentPog = 0;
 
-    int row = -50;
+    int row = 5;
+
+    int spaceIn = 22;
+    int baseSpace = -50;
     // -50 // row= 5
     // -30 // row= 4
-    // -10 //
+    // -10 // row= 3
     // 20
     // 40
     // 60
@@ -43,15 +49,12 @@ public class GameBackGroundListener
 
     int x = 0, y = 0;
 
-    static Engine game = new Engine();
+    static gameEngineMulti game = new gameEngineMulti();
     static int nextColumnIndex = 0;
 
-<<<<<<< HEAD
-    String[] textureNames = { "Bord-1.png", "POG-fire.png", "POG-ice.png", "BG-1.png" }; // The Sprits
-=======
 
-    String[] textureNames = {"Bord.png" , "POG-red.png" , "POG-yellow" ,"Flat_Game_Background_3 1.png"}; //The Sprits
->>>>>>> dev
+    String[] textureNames = { "Bord-1.png", "POG-fire.png", "POG-ice.png", "BG-1.png" }; // The Sprits
+
     TextureReader.Texture[] texture = new TextureReader.Texture[textureNames.length];
     int textureIndex[] = new int[textureNames.length];
 
@@ -76,7 +79,7 @@ public class GameBackGroundListener
         listOfPogs = new ArrayList<>(42);
         for (int i = 0; i < 42; i++) {
             int assetIndex = (i % 2 == 0) ? 1 : 2;
-            Pog ele = new Pog(0, 105, assetIndex, 250);
+            Pog ele = new Pog(0, 110, assetIndex, 250);
             listOfPogs.add(ele);
         }
 
@@ -136,8 +139,9 @@ public class GameBackGroundListener
         for (int i = 0; i < listOfPogs.size(); i++) {
             Pog ele = listOfPogs.get(i);
             int startPoint = ele.getYposition();
-            if (ele.isDrop() && ele.getYposition() > ele.getMinHeight()) {
-                ele.setYposition(--startPoint);
+            if (ele.isDrop() && ele.getYposition() >= ele.getMinHeight()) {
+                startPoint--;
+                ele.setYposition(startPoint);
             }
         }
     }
@@ -297,12 +301,39 @@ public class GameBackGroundListener
         yposition = (int) ((height / 2) - y);
         System.out.println("x : " + xposition + " y : " + yposition);
         handleMousePosition();
-        if (currentPog < listOfPogs.size()) {
-            dropPogTo(-50, currentPog); // TODO: check if i can drop here or no ^^
+        if (currentPog < listOfPogs.size() && game.dropToken(nextColumnIndex)) {
+            game.switchPlayer();
+            int r = game.indexMove(nextColumnIndex);
+            game.printBoard();
+            if (game.checkWin()) {
+                if (game.getCurrentPlayer() == 'X'){
+                    new Player_One_Win();
+                }else {
+                    new Player_Two_Win();
+                }
+            }
+            dropPogTo(r, currentPog); // TODO: check if i can drop here or no ^^
         }
     }
 
-    private void dropPogTo(int minHeight, int current) {
+    private void dropPogTo(int r, int current) {
+        int minHeight = -50;
+        // -50 // row= 6
+        // -30 // row= 5
+        // -10 // row= 4
+        // 20  // row= 3
+        // 40  // row= 2
+        // 60  // row= 1
+        // 80  // row= 0
+        System.out.println("the row : " + r);
+        switch (r){
+            case 5: minHeight = baseSpace; break;
+            case 4: minHeight = baseSpace + spaceIn; break;
+            case 3: minHeight = baseSpace + (spaceIn*2); break;
+            case 2: minHeight = baseSpace + (spaceIn*3); break;
+            case 1: minHeight = baseSpace + (spaceIn*4); break;
+            case 0: minHeight = baseSpace + (spaceIn*5); break;
+        }
         Pog ele = listOfPogs.get(current);
         ele.setMinHeight(minHeight);
         ele.setDrop(true);
