@@ -1,8 +1,9 @@
 package connect4.Frames;
 
+import connect4.Connect4;
 import connect4.GameEngine.UserData;
-import connect4.Listeners.GameEventListner2;
-import connect4.Listeners.GameEventListner3;
+import connect4.Listeners.GameEventListener2;
+import connect4.Listeners.GameEventListener3;
 
 import javax.media.opengl.GLCanvas;
 import javax.swing.*;
@@ -20,15 +21,14 @@ public class ThemesFrame extends JFrame implements ActionListener {
     private final JRadioButton them2 ;
     private final GLCanvas gLCanvas2 ;
     private final GLCanvas gLCanvas3;
-    private final GameEventListner2 listner2 = new GameEventListner2();
-    private final GameEventListner3 listner3 =new GameEventListner3();
+    private final GameEventListener2 listner2 = new GameEventListener2();
+    private final GameEventListener3 listner3 =new GameEventListener3();
 
     private final ButtonGroup themeGroup ;
     private final JButton play ;
 
     public ThemesFrame(){
 
-        SecondaryFrame s= new SecondaryFrame();
         themepanel1 = new JPanel() ;
         themepanel2 =new JPanel() ;
         themepanel3 =new JPanel() ;
@@ -39,10 +39,6 @@ public class ThemesFrame extends JFrame implements ActionListener {
 
         gLCanvas2.addGLEventListener(listner2);
         gLCanvas3.addGLEventListener(listner3);
-        gLCanvas2.addKeyListener(listner2);
-        gLCanvas3.addKeyListener(listner3);
-        addKeyListener(listner2);
-        addKeyListener(listner3);
 
         setLayout(null);
 
@@ -59,7 +55,7 @@ public class ThemesFrame extends JFrame implements ActionListener {
         themepanel2 .setBounds(0,70,800,275);
         add(themepanel2) ;
         themepanel2.setLayout(new GridLayout(1,1));
-        themepanel2.add(gLCanvas2);      //
+        themepanel2.add(gLCanvas2);
 
         themepanel3.setBounds(0,360,800,60);
         add(themepanel3);
@@ -114,9 +110,11 @@ public class ThemesFrame extends JFrame implements ActionListener {
             }
         }
         if(e.getSource().equals(them1)){
+            Connect4.gameStatus.setTheme(1);
             user.setDesign(1);
         }
         else if(e.getSource().equals(them2)){
+            Connect4.gameStatus.setTheme(2);
             user.setDesign(2);
         }
     }
