@@ -71,7 +71,6 @@ public class GameFrame extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(pause)){
-            new pausMenue();
             setTitle("Connect4"); //Iniyialize Jframe
             System.out.println("menu");
 
