@@ -10,6 +10,16 @@ package connect4.GameEngine;
  */
 public class Pog {
     private int xposition , yposition , assetIndex , minHeight;
+    private boolean isDrop = false;
+
+    public boolean isDrop() {
+        return isDrop;
+    }
+
+
+    public void setDrop(boolean drop) {
+        isDrop = drop;
+    }
 
     public Pog(int xpositon , int yposition , int assetIndex , int minHeight) {
         this.xposition = xpositon;
@@ -48,4 +58,6 @@ public class Pog {
     public void setMinHeight(int minHeight) {
         this.minHeight = minHeight;
     }
+
+
 }
