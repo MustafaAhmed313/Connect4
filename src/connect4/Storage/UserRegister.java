@@ -6,13 +6,12 @@ import java.io.*;
 
 public class UserRegister {
     private static String filename = "C:\\Users\\mosta\\IdeaProjects\\Connect4\\src\\connect4\\Storage\\data.txt";
-    private static UserData data = new UserData();
     public static void writeUser(UserData user) {
         try {
             BufferedWriter writer = new BufferedWriter(
                     new FileWriter(filename , true)
             );
-            writer.append(user.username + ":" + user.level + "\n");
+            writer.append(user.getUsername() + ":" + user.getLevel() + "\n");
             writer.close();
         }catch (IOException ex) {
             ex.printStackTrace();
