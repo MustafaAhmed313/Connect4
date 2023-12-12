@@ -1,66 +1,135 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package connect4.GameEngine;
 
-/**
- *
- * @author mosta
- */
-public class Engine {
-    static final int LEVEL1 = 1  , LEVEL2 = 2 , LEVEL3 = 3;
-    int player , size , level;
-    boolean player1win , player2win , noGameLoop;
-    int[][] board;
+import java.util.Arrays;
+import java.util.Scanner;
 
-    public Engine() {
-        this.player = 1;
-        this.player1win = false;
-        this.player2win = false;
-        this.noGameLoop = false;
-        this.size = 0;
-    }
+public class gameEngineMulti {
+    int index = 0;
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        gameEngineMulti connect4 = new gameEngineMulti();
+        connect4.printBoard();
 
-    public void setLevel(int level) {
-        this.level = (level == 1) ? LEVEL1 : (level == 2) ? LEVEL2 : LEVEL3;
-    }
+        while (true) {
+            int column = input.nextInt();
+            if (connect4.dropToken(column)) {
+                connect4.switchPlayer();
+                connect4.printBoard();
 
-    public void playTurn(int columnPosition) {
-        int i = 5;
-        while (board[i][columnPosition] != 0 && i >= 0) i--;
-        if (i != -1) {
-            board[i][columnPosition] = this.player;
-            this.player = (this.player == 1) ? 2 : 1;
-            size++;
-        }
-    }
-
-    public boolean isFull() {
-        return this.size == 7 * 6;
-    }
-
-    public void displayCurrentState() {
-        System.out.print("[");
-        for (int i = 0 ; i < 6 ; i++) {
-            System.out.print("[");
-            for (int j = 0 ; j < 7 ; j++) {
-                System.out.print(board[i][j]);
-                if (j < 6) System.out.print(" , ");
+                if (connect4.checkWin()) {
+                    if (connect4.getCurrentPlayer() == 'X')
+                        System.out.println("Player O wins!");
+                    else
+                        System.out.println("Player X wins!");
+                    break;
+                }
+            } else {
+                System.out.println("Column is full. Try again.");
             }
-            System.out.print("]");
-            if (i < 5) System.out.print(",");
-            System.out.println();
         }
-        System.out.print("]");
-        System.out.println();
+    }
+    private static final int ROWS = 6;
+    private static final int COLUMNS = 7;
+    private char[][] board;
+    private char currentPlayer;
+
+    public gameEngineMulti() {
+        board = new char[ROWS][COLUMNS];
+        for (char[] row : board) {
+            Arrays.fill(row, ' ');
+        }
+        currentPlayer = 'X';
     }
 
-    public void clearCurrentState() {
-        board = new int[6][7];
-        this.player = 1;
-        this.player1win = false;
-        this.player2win = false;
-        this.noGameLoop = false;
+    public void printBoard() {
+        for (char[] row : board) {
+            System.out.println(Arrays.toString(row));
+        }
     }
+
+    public boolean dropToken(int column) {
+        for (int row = ROWS - 1; row >= 0; row--) {
+            if (board[row][column] == ' ') {
+                board[row][column] = currentPlayer;
+                return true;
+            }
+        }
+        return false; // Column is full
+    }
+
+    public boolean checkWin() {
+        return checkHorizontal() || checkVertical() || checkDiagonal();
+    }
+
+    private boolean checkHorizontal() {
+        for (int row = 0; row < ROWS; row++) {
+            for (int col = 0; col < COLUMNS - 3; col++) {
+                if (board[row][col] != ' '
+                        && board[row][col] == board[row][col + 1]
+                        && board[row][col] == board[row][col + 2]
+                        && board[row][col] == board[row][col + 3]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean checkVertical() {
+        for (int row = 0; row < ROWS - 3; row++) {
+            for (int col = 0; col < COLUMNS; col++) {
+                if (board[row][col] != ' '
+                        && board[row][col] == board[row + 1][col]
+                        && board[row][col] == board[row + 2][col]
+                        && board[row][col] == board[row + 3][col]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean checkDiagonal() {
+        for (int row = 0; row < ROWS - 3; row++) {
+            for (int col = 0; col < COLUMNS - 3; col++) {
+                if (board[row][col] != ' '
+                        && board[row][col] == board[row + 1][col + 1]
+                        && board[row][col] == board[row + 2][col + 2]
+                        && board[row][col] == board[row + 3][col + 3]) {
+                    return true;
+                }
+            }
+        }
+
+        for (int row = 3; row < ROWS; row++) {
+            for (int col = 0; col < COLUMNS - 3; col++) {
+                if (board[row][col] != ' '
+                        && board[row][col] == board[row - 1][col + 1]
+                        && board[row][col] == board[row - 2][col + 2]
+                        && board[row][col] == board[row - 3][col + 3]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public char getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void switchPlayer() {
+        currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+    }
+    private int indexMove(int column) {
+        for (int i = (ROWS - 1); i >= 0; i--) {
+            if (board[i][column] == ' ') {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+
 }

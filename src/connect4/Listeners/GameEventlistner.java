@@ -80,9 +80,7 @@ public class GameEventlistner implements GLEventListener {
         GL gl =glAutoDrawable.getGL();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
         gl.glLoadIdentity();
-
         drawBackground(gl);
-
     }
 
     @Override
