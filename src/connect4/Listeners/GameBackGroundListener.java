@@ -13,11 +13,8 @@ import connect4.Frames.Player_One_Win;
 import connect4.Frames.Player_Two_Win;
 import connect4.GameEngine.Pog;
 import connect4.Texture.TextureReader;
-<<<<<<< HEAD
 import connect4.GameEngine.gameEngineMulti;
-=======
 import connect4.GameEngine.*;
->>>>>>> 78a3aef2fa420248f0072a5e604d6f5c6e2cbf97
 
 import java.awt.*;
 import java.awt.event.*;
@@ -36,17 +33,12 @@ public class GameBackGroundListener extends JFrame
     int maxWidth = 100; // Initial Positions
     int maxHeight = 100;
     GL gl;
-    int xposition = 0 , yposition = 0;
-    int [] arr = {6,6,6,6,6,6,6};
+    int xposition = 0, yposition = 0;
+    int[] arr = {6, 6, 6, 6, 6, 6, 6};
     int animationIndex = 0;
-<<<<<<< HEAD
     ArrayList<Pog> listOfPogs;
     int currentPog = 0;
-=======
->>>>>>> 2025b979513b76a8b626375127ea4a1998fd246f
-
     int row = 5;
-
     int spaceIn = 22;
     int baseSpace = -50;
     // -50 // row= 5
@@ -63,7 +55,7 @@ public class GameBackGroundListener extends JFrame
     static int nextColumnIndex = 0;
 
 
-    String[] textureNames = { "Bord-1.png", "POG-fire.png", "POG-ice.png", "BG-1.png" }; // The Sprits
+    String[] textureNames = {"Bord-1.png", "POG-fire.png", "POG-ice.png", "BG-1.png"}; // The Sprits
 
     TextureReader.Texture[] texture = new TextureReader.Texture[textureNames.length];
     int textureIndex[] = new int[textureNames.length];
@@ -142,6 +134,16 @@ public class GameBackGroundListener extends JFrame
         drawPogs(gl, x, y);
         // Draw the POG
         drawBoard(gl, 0, -2, 0, 8);
+
+    }
+
+    @Override
+    public void reshape(GLAutoDrawable glAutoDrawable, int i, int i1, int i2, int i3) {
+
+    }
+
+    @Override
+    public void displayChanged(GLAutoDrawable glAutoDrawable, boolean b, boolean b1) {
 
     }
 
@@ -256,8 +258,7 @@ public class GameBackGroundListener extends JFrame
         return keyBits.get(keyCode);
     }
 
-<<<<<<< HEAD
-    private void handleMousePosition () {
+    private void handleMousePosition() {
         if (xposition >= -271 && xposition <= -210) {
             nextColumnIndex = 0;
             x = -60;
@@ -286,73 +287,42 @@ public class GameBackGroundListener extends JFrame
             nextColumnIndex = 6;
             x = 60;
         }
-=======
-
-    @Override
-    public void display(GLAutoDrawable glAutoDrawable) {
-
-        GL gl = glAutoDrawable.getGL();
-        gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
-        gl.glLoadIdentity();
-
-        drawBackground(gl);
-//
-//        handleKeyPress();
-
-        drawSprite(gl , xposition , yposition , 1 , 1);
-
-//
-        drawBoard(gl , 0 , -2 , 0 , 8);
-//
-
-
-
->>>>>>> 2025b979513b76a8b626375127ea4a1998fd246f
     }
 
+
     @Override
-    public void reshape (GLAutoDrawable glAutoDrawable,int i, int i1, int i2, int i3){
+    public void mouseDragged(MouseEvent e) {
 
     }
 
     @Override
-    public void displayChanged (GLAutoDrawable glAutoDrawable,boolean b, boolean b1){
-
-    }
-
-    @Override
-    public void actionPerformed (ActionEvent e){
-
-    }
-
-    @Override
-<<<<<<< HEAD
-    public void mouseClicked (MouseEvent e){
-        xposition = e.getX();
-        yposition = e.getY();
-        System.out.println(xposition + " " + yposition);
-        double x = e.getX(), y = e.getY();
+    public void mouseMoved (MouseEvent e){
+        double xM = e.getX(), yM = e.getY();
         Component c = e.getComponent();
         double width = c.getWidth(), height = c.getHeight();
-        xposition = (int) (x - (width / 2));
-        yposition = (int) ((height / 2) - y);
-        System.out.println("x : " + xposition + " y : " + yposition);
+        xposition = (int) (xM - (width / 2));
+        yposition = (int) ((height / 2) - yM);
         handleMousePosition();
-        if (currentPog < listOfPogs.size()) {
-            dropPogTo(-50, currentPog); // TODO: check if i can drop here or no ^^
+        for (int i = currentPog; i < listOfPogs.size(); i++) {
+            listOfPogs.get(i).setXposition(x);
         }
-=======
-    public void mouseClicked(MouseEvent e) {
-         xposition = e.getX();
-         yposition = e.getY();
-//        Component c = e.getComponent();
-//        int width = c.getWidth() , height = c.getHeight();
-//        xposition = (int) (x / width * 800) - 800;
-//        yposition =  600 - (int) (y / height * 600);
-//        System.out.println(xposition + " " + yposition);
-        System.out.println(xposition + " " + yposition);
+    }
 
->>>>>>> 2025b979513b76a8b626375127ea4a1998fd246f
+    private void dropPogTo ( int minHeight, int current){
+        Pog ele = listOfPogs.get(current);
+        ele.setMinHeight(minHeight);
+        ele.setDrop(true);
+        currentPog++;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
     }
 
     @Override
@@ -373,31 +343,5 @@ public class GameBackGroundListener extends JFrame
     @Override
     public void mouseExited(MouseEvent e) {
 
-    }
-
-    private void dropPogTo (int minHeight, int current){
-        Pog ele = listOfPogs.get(current);
-        ele.setMinHeight(minHeight);
-        ele.setDrop(true);
-        currentPog++;
-
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseMoved (MouseEvent e){
-        double xM = e.getX(), yM = e.getY();
-        Component c = e.getComponent();
-        double width = c.getWidth(), height = c.getHeight();
-        xposition = (int) (xM - (width / 2));
-        yposition = (int) ((height / 2) - yM);
-        handleMousePosition();
-        for (int i = currentPog; i < listOfPogs.size(); i++) {
-            listOfPogs.get(i).setXposition(x);
-        }
     }
 }

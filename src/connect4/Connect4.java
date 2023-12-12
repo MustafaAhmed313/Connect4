@@ -22,18 +22,10 @@ public class Connect4 {
     public static GameStatus gameStatus = new GameStatus();
     public static Clip clip;
     public static int check = 1;
-<<<<<<< HEAD
     public static void main(String[] args) {
         try {
-            File file =new File("E:\\Java projects\\Connect4\\src\\connect4\\Assets\\Carefree(chosic.com).wav");                               //////////////////////////////
+            File file =new File("C:\\Users\\mosta\\IdeaProjects\\Connect4\\src\\connect4\\Assets\\Carefree(chosic.com).wav");                               //////////////////////////////
             AudioInputStream audioStream =AudioSystem.getAudioInputStream(file);
-=======
-
-    public static void main(String[] args) {
-        try {
-            File file = new File("E:\\Connect4\\src\\connect4\\Assets\\Carefree(chosic.com).wav"); //////////////////////////////
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
->>>>>>> 2025b979513b76a8b626375127ea4a1998fd246f
             clip = AudioSystem.getClip();
             clip.open(audioStream);
             new MainFrame();

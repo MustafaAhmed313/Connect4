@@ -13,10 +13,12 @@ import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLEventListener;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class GameFrame extends JFrame  {
+public class GameFrame extends JFrame implements ActionListener {
 
-
+    private final JButton pause = new JButton("||");
     private JPanel ViewBoard = new JPanel();
     private JPanel ViewControl = new JPanel();
 
@@ -62,21 +64,14 @@ public class GameFrame extends JFrame  {
         setFocusable(true); // Focus on the Key Events
         glCanvas.requestFocus();
     }
-<<<<<<< HEAD
+
   
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource().equals(pause)){
+        if (e.getSource().equals(pause)) {
+            new PauseFrame();
             setTitle("Connect4"); //Iniyialize Jframe
             System.out.println("menu");
-=======
->>>>>>> 2025b979513b76a8b626375127ea4a1998fd246f
-
-    private GLEventListener basicTheme() {return new GameEventlistner();}
-    private GLEventListener dragonTheme() {return new GameEventListener2();}
-
-    public static void main(String[] args) {
-        new GameFrame();
+        }
     }
-
 }
