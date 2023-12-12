@@ -4,6 +4,7 @@
  */
 package connect4;
 
+<<<<<<< HEAD
 import javax.sound.sampled.*;
 
 import connect4.Frames.GameFrame;
@@ -23,11 +24,15 @@ import java.io.IOException;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.border.Border;
 
+=======
+import connect4.Frames.MainFrame;
+>>>>>>> 7cd52cbc7d4a0e8b5d87748a1ff5f6554e86c6d1
 
 /**
  *
  * @author mosta
  */
+<<<<<<< HEAD
 public class Connect4 extends JFrame implements ActionListener {
 
   
@@ -603,4 +608,10 @@ public class Connect4 extends JFrame implements ActionListener {
         
      
      }
+=======
+public class Connect4 {
+    public static void main(String[] args) {
+        new MainFrame();
+    }
+>>>>>>> 7cd52cbc7d4a0e8b5d87748a1ff5f6554e86c6d1
 }
