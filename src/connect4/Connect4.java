@@ -6,27 +6,21 @@ package connect4;
 
 
 import connect4.Frames.MainFrame;
+import connect4.Storage.GameStatus;
 
-<<<<<<< HEAD
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.TargetDataLine;
-import java.io.File;
 
 /**
  *
  * @author mosta
  */
-=======
->>>>>>> bb6708a0cff512359856465fd1ce0de69fc6cda7
+
 public class Connect4 {
+    public static GameStatus gameStatus = new GameStatus();
     public static void main(String[] args) {
         try {
             new MainFrame();
         }catch (Exception ex) {
             ex.printStackTrace();
         }
-
     }
 }
