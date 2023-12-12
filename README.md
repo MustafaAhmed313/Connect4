@@ -105,14 +105,14 @@
 	- [ ] Game Views Controller
 
 - [ ] Smooth Controls [Accepted] `Ahmed Ezzeldeen , Yousef Amir`
-	- [ ] mouse controls
+	- [X] mouse controls
 	- [ ] keypad controls
 	
 - [ ] High Scores [Accepted] `Khafagy`
 	- [ ] sort the user up to the shortest time they scored for their games
 	- [ ] update the score of the user if he break the score by time shorter than the last score 
 
-- [ ] Sound [Accepted] `Elkhouly>
+- [ ] Sound [Accepted] `Elkhouly`
 	- [ ] turn on/off background sound
 	- [X] sound for the main frame menu
 	- [ ] sound for the normal scene
@@ -120,7 +120,7 @@
 	- [ ] ratio input controls the sound volume
 
 - [ ] Animation [Accepted] `Mustafa Ahmed , Ezzeldeen , Yousef Amir`
-	- [ ] tuple lied down with fixed previos state for the previous tuples
+	- [X] tuple lied down with fixed previos state for the previous tuples
 	
 - [ ] Timer [Accepted] `Elkhouly>
 	- [ ] time you take to win or lose in the game as a user
