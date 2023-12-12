@@ -1,15 +1,25 @@
 package connect4.Frames;
 
+import connect4.Connect4.*;
 import connect4.Listeners.GameBackGroundListener;
 import com.sun.opengl.util.Animator;
 import com.sun.opengl.util.FPSAnimator;
 import connect4.Listeners.Connect4Listener;
+import connect4.Listeners.GameBackGroundListener2;
 
 import javax.media.opengl.GLCanvas;
+import javax.media.opengl.GLEventListener;
 import javax.swing.*;
 import java.awt.*;
 
+<<<<<<< HEAD
 public class GameFrame extends JFrame {
+=======
+
+
+public class GameFrame extends JFrame  {
+
+>>>>>>> dev
 
     private JPanel ViewBoard = new JPanel();
     private JPanel ViewControl = new JPanel();
@@ -46,7 +56,12 @@ public class GameFrame extends JFrame {
 
         setLayout(null);
 
+<<<<<<< HEAD
         setTitle("Connect4"); // Iniyialize Jframe
+=======
+
+        setTitle("Connect4"); //Iniyialize Jframe
+>>>>>>> dev
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setSize(1000, 600);
@@ -57,7 +72,16 @@ public class GameFrame extends JFrame {
         glCanvas.requestFocus();
     }
 
+<<<<<<< HEAD
+=======
+    private GLEventListener basicTheme() {return new GameBackGroundListener();}
+    private GLEventListener dragonTheme() {return new GameBackGroundListener2();}
+
+>>>>>>> dev
     public static void main(String[] args) {
         new GameFrame();
     }
+
+
+
 }

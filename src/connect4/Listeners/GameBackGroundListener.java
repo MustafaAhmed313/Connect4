@@ -46,7 +46,12 @@ public class GameBackGroundListener
     static Engine game = new Engine();
     static int nextColumnIndex = 0;
 
+<<<<<<< HEAD
     String[] textureNames = { "Bord-1.png", "POG-fire.png", "POG-ice.png", "BG-1.png" }; // The Sprits
+=======
+
+    String[] textureNames = {"Bord.png" , "POG-red.png" , "POG-yellow" ,"Flat_Game_Background_3 1.png"}; //The Sprits
+>>>>>>> dev
     TextureReader.Texture[] texture = new TextureReader.Texture[textureNames.length];
     int textureIndex[] = new int[textureNames.length];
 
