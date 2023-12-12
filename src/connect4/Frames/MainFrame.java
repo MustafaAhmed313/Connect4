@@ -111,8 +111,11 @@ public class MainFrame extends JFrame implements ActionListener {
         Button5.addActionListener(this);
 
 
+
         //action when we clicked on easy
 
+
+        setResizable(false);
         setTitle("Connect 4");
         setSize(700, 900);
         setLocationRelativeTo(this);
@@ -133,6 +136,9 @@ public class MainFrame extends JFrame implements ActionListener {
             new SettingsFrame();
         } else if (e.getSource().equals(Button5)) {
             System.exit(0);
+        }
+        else if(e.getSource().equals(Button3)){
+            new HighScoreFrame();
         }
     }
 }

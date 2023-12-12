@@ -88,6 +88,7 @@ public class ThemesFrame extends JFrame implements ActionListener {
         themeGroup.add(them1);
         themeGroup.add(them2);
 
+        setResizable(false);
         setTitle("Themes");
         setSize(800, 850);
         setLocationRelativeTo(this);
@@ -97,7 +98,9 @@ public class ThemesFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if(e.getSource().equals(play)){
+            new GameFrame();
             if(user.getNumPlayer()==1){
                 System.out.println(user.getNumPlayer()+" "+user.getUsername() +"  "+user.getLevel()  +" "+user.getDesign());
             }

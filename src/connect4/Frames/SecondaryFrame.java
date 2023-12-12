@@ -86,7 +86,7 @@ public class SecondaryFrame extends JFrame implements ActionListener {
 
         Font them = new Font(themButton.getFont().getName(), Font.BOLD, 20);
         themButton.setFont(them);
-        themButton.setBackground(Color.red);
+        themButton.setBackground(Color.CYAN);
         themButton.addActionListener(this);
 
         radio1.addActionListener(this);
