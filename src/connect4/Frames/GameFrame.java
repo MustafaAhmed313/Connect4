@@ -4,10 +4,13 @@ import connect4.Listeners.GameBackGroundListener;
 import com.sun.opengl.util.Animator;
 import com.sun.opengl.util.FPSAnimator;
 import connect4.Listeners.Connect4Listener;
+import connect4.Listeners.GameBackGroundListener2;
 
 import javax.media.opengl.GLCanvas;
+import javax.media.opengl.GLEventListener;
 import javax.swing.*;
 import java.awt.*;
+import java.net.http.WebSocket;
 
 
 public class GameFrame extends JFrame {
@@ -56,6 +59,8 @@ public class GameFrame extends JFrame {
         setFocusable(true); // Focus on the Key Events
         glCanvas.requestFocus();
     }
+    private GLEventListener basicTheme() {return new GameBackGroundListener();}
+    private GLEventListener dragonTheme() {return new GameBackGroundListener2();}
     public static void main(String[] args) {
         new GameFrame();
     }

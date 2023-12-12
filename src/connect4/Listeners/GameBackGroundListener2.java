@@ -1,43 +1,29 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package connect4.Listeners;
 
-/**
- *
- * @author mosta
- */
-
-import connect4.Texture.TextureReader;
 import connect4.GameEngine.Engine;
+import connect4.Texture.TextureReader;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.IOException;
-import java.util.BitSet;
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.IOException;
+import java.util.BitSet;
 
-public class GameBackGroundListener implements GLEventListener , MouseListener , KeyListener , ActionListener {
+public class GameBackGroundListener2 implements GLEventListener, MouseListener, KeyListener, ActionListener {
     int maxWidth = 100; //Initial Positions
     int maxHeight = 100;
-    int xposition = 0 , yposition = 0;
+    int xposition = 0, yposition = 0;
 
-    int x = 0 , y = 0;
+    int x = 0, y = 0;
 
     static Engine game = new Engine();
     static int nextColumnIndex = 0;
 
 
-    String[] textureNames = {"Bord.png" , "POG-red.png" , "POG-yellow" ,"Flat_Game_Background_3 1.png"}; //The Sprits
+    String[] textureNames = {"Bord2.png", "POG-fire.png", "POG-ice" , "Game_Background_71 1.png"}; //The Sprits
     TextureReader.Texture[] texture = new TextureReader.Texture[textureNames.length];
     int textureIndex[] = new int[textureNames.length];
 
@@ -71,7 +57,7 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
         //number of textures,array to hold the indeces
         gl.glGenTextures(textureNames.length, textureIndex, 0);
 
-        for (int i = 0; i < textureNames.length ; i++) {
+        for (int i = 0; i < textureNames.length; i++) {
             try {
                 String assetsFolderName = "Connect4//Assets";
                 texture[i] = TextureReader.readTexture(assetsFolderName + "//" + textureNames[i], true);
@@ -89,15 +75,15 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
                         GL.GL_UNSIGNED_BYTE,
                         texture[i].getPixels() // Imagedata
                 );
-            } catch( IOException e ) {
+            } catch (IOException e) {
                 System.out.println(e);
                 e.printStackTrace();
             }
         }
     }
 
-    private void drawBackground(GL gl){
-        gl.glEnable(GL.GL_BLEND);	// Turn Blending On
+    private void drawBackground(GL gl) {
+        gl.glEnable(GL.GL_BLEND);    // Turn Blending On
         gl.glBindTexture(GL.GL_TEXTURE_2D, textureIndex[textureNames.length - 1]);
 
         gl.glBegin(GL.GL_QUADS);
@@ -115,9 +101,9 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
         gl.glDisable(GL.GL_BLEND);
     }
 
-    private void drawSprite(GL gl , int x , int y ,  int index , int scale){
+    private void drawSprite(GL gl, int x, int y, int index, int scale) {
         gl.glEnable(GL.GL_BLEND);
-        gl.glBindTexture(GL.GL_TEXTURE_2D, textureIndex[index]);	// Turn Blending On
+        gl.glBindTexture(GL.GL_TEXTURE_2D, textureIndex[index]);    // Turn Blending On
 
         gl.glPushMatrix();
 
@@ -143,9 +129,9 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
         gl.glDisable(GL.GL_BLEND);
     }
 
-    private void drawBoard(GL gl , int x , int y ,  int index , int scale) {
+    private void drawBoard(GL gl, int x, int y, int index, int scale) {
         gl.glEnable(GL.GL_BLEND);
-        gl.glBindTexture(GL.GL_TEXTURE_2D, textureIndex[index]);	// Turn Blending On
+        gl.glBindTexture(GL.GL_TEXTURE_2D, textureIndex[index]);    // Turn Blending On
 
         gl.glPushMatrix();
 
@@ -235,11 +221,10 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
 //
 //        handleKeyPress();
 
-        drawSprite(gl , x , y , 1 , 1);
+        drawSprite(gl, x, y, 1, 1);
 //
-        drawBoard(gl , 0 , -2 , 0 , 8);
+        drawBoard(gl, 0, -2, 0, 8);
 //
-
 
 
     }
@@ -261,9 +246,9 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        double x = e.getX() , y = e.getY();
+        double x = e.getX(), y = e.getY();
         Component c = e.getComponent();
-        double width = c.getWidth() , height = c.getHeight();
+        double width = c.getWidth(), height = c.getHeight();
         xposition = (int) (x - (width / 2));
         yposition = (int) ((height / 2) - y);
         handleMousePosition();
