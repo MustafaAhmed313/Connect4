@@ -1,5 +1,6 @@
 package connect4.Frames;
 
+import connect4.Connect4;
 import connect4.GameEngine.UserData;
 
 import javax.swing.*;
@@ -14,8 +15,11 @@ public class SettingsFrame extends JFrame implements ActionListener {
     private final JToggleButton toggle1;
     private final JLabel backgroundsound;
     private final JLabel gamesound ;
+    private final JButton apply ;
 
     public SettingsFrame(){
+
+        setResizable(false);
         setLayout(null);
         volumSettings = new JLabel("Settings of Sound");
         add(volumSettings);
@@ -45,23 +49,49 @@ public class SettingsFrame extends JFrame implements ActionListener {
         toggle1 =new JToggleButton("ON / OF");
         add(toggle1);
         toggle1.setBounds(200,135,80,30);
+        toggle.addActionListener(this);
+
+        apply = new JButton("Apply");
+        apply.setBounds(150,300,100,50);
+        add(apply);
+        Font ap = new Font(apply  .getFont().getName(), Font.BOLD, 20);
+        apply.setFont(ap);
 
 
 
+        apply.addActionListener(this);
+
+
+        setResizable(false);
         setTitle("settings");
         setSize(400, 400);
         setLocationRelativeTo(this);
         setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
+    private static void closeFrame(SettingsFrame frame) {
+        frame.dispose();
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource().equals(toggle)){
-            user.setBackSound(0);
+        if(e.getSource().equals(toggle)  ){
+           if(Connect4.check==1) {
+               Connect4.clip.close();
+               Connect4.check = 0;
+           }
+           else {
+               Connect4.clip.start();
+               Connect4.check = 0;
+           }
         }
+
         else if(e.getSource().equals(toggle1)){
             user.setGameSound(0);
+        }
+
+        else if(e.getSource().equals(apply)){
+            SettingsFrame.closeFrame(this);
         }
     }
 }

@@ -111,9 +111,12 @@ public class MainFrame extends JFrame implements ActionListener {
         Button5.addActionListener(this);
 
 
+
         //action when we clicked on easy
 
-        setTitle("Our Game");
+
+        setResizable(false);
+        setTitle("Connect 4");
         setSize(700, 900);
         setLocationRelativeTo(this);
         setVisible(true);
@@ -123,16 +126,19 @@ public class MainFrame extends JFrame implements ActionListener {
     public void actionPerformed (ActionEvent e){
         if (e.getSource().equals(Button1)) {
             user.setNumPlayer(1);
+            Connect4.gameStatus.setMode(1);
             new SecondaryFrame();
-
         } else if (e.getSource().equals(Button2)) {
             user.setNumPlayer(2);
+            Connect4.gameStatus.setMode(2);
             new MultiPlayerFrame();
-
         } else if (e.getSource().equals(Button4)) {
             new SettingsFrame();
         } else if (e.getSource().equals(Button5)) {
             System.exit(0);
+        }
+        else if(e.getSource().equals(Button3)){
+            new HighScoreFrame();
         }
     }
 }
