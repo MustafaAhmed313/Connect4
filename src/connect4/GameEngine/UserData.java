@@ -14,7 +14,7 @@ public class UserData {
     private int  numPlayer ;
     private int backSound =1;
     private int gameSound =1;
-    boolean flag = true ;
+    private boolean flag = true ;
      
     
     
@@ -88,6 +88,13 @@ public class UserData {
     public void setGameSound(int gameSound) {
         this.gameSound = gameSound;
     }
-    
+
+    public boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
 }
 
