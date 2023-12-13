@@ -9,36 +9,58 @@ package connect4.Listeners;
  * @author mosta
  */
 
+import connect4.GameEngine.Pog;
 import connect4.Texture.TextureReader;
+import connect4.GameEngine.Engine;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.io.IOException;
-import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.BitSet;
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
+import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
-public class GameBackGroundListener implements GLEventListener , MouseListener , KeyListener , ActionListener {
-    int maxWidth = 100; //Initial Positions
+public class GameBackGroundListener
+        implements GLEventListener, MouseListener, KeyListener, ActionListener, MouseMotionListener {
+    int maxWidth = 100; // Initial Positions
     int maxHeight = 100;
+<<<<<<< HEAD
     GL gl;
     int xposition = 0 , yposition = 0;
     int [] arr = {6,6,6,6,6,6,6};
     int animationIndex = 0;
+=======
+    int xposition = 0, yposition = 0;
+    ArrayList<Pog> listOfPogs;
+    int currentPog = 0;
+>>>>>>> 343c2efe9d71b5a66c68c3eccad874128343b9d3
 
+    int row = -50;
+    // -50 // row= 5
+    // -30 // row= 4
+    // -10 //
+    // 20
+    // 40
+    // 60
+    // 80
 
-    String[] textureNames = {"Bord.png" , "POG-red.png" ,"Flat_Game_Background_3 1.png"}; //The Sprits
+    int x = 0, y = 0;
+
+    static Engine game = new Engine();
+    static int nextColumnIndex = 0;
+
+<<<<<<< HEAD
+    String[] textureNames = { "Bord-1.png", "POG-fire.png", "POG-ice.png", "BG-1.png" }; // The Sprits
+=======
+
+    String[] textureNames = {"Bord.png" , "POG-red.png" , "POG-yellow" ,"Flat_Game_Background_3 1.png"}; //The Sprits
+>>>>>>> dev
     TextureReader.Texture[] texture = new TextureReader.Texture[textureNames.length];
     int textureIndex[] = new int[textureNames.length];
-
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -58,26 +80,33 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
 
     @Override
     public void init(GLAutoDrawable glAutoDrawable) {
-        GL gl = glAutoDrawable.getGL(); //This Will Clear The Background Color To Black
+        listOfPogs = new ArrayList<>(42);
+        for (int i = 0; i < 42; i++) {
+            int assetIndex = (i % 2 == 0) ? 1 : 2;
+            Pog ele = new Pog(0, 105, assetIndex, 250);
+            listOfPogs.add(ele);
+        }
+
+        GL gl = glAutoDrawable.getGL(); // This Will Clear The Background Color To Black
         gl.glClearColor(0f, 0f, 0f, 0f);
 
         // [New Part Of Code] {-->
 
-        gl.glEnable(GL.GL_TEXTURE_2D);  // Enable Texture Mapping
+        gl.glEnable(GL.GL_TEXTURE_2D); // Enable Texture Mapping
         gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
 
-        //number of textures,array to hold the indeces
+        // number of textures,array to hold the indeces
         gl.glGenTextures(textureNames.length, textureIndex, 0);
 
-        for (int i = 0; i < textureNames.length ; i++) {
+        for (int i = 0; i < textureNames.length; i++) {
             try {
                 String assetsFolderName = "Connect4//Assets";
                 texture[i] = TextureReader.readTexture(assetsFolderName + "//" + textureNames[i], true);
                 gl.glBindTexture(GL.GL_TEXTURE_2D, textureIndex[i]);
 
-                //mipmapsFromPNG(gl, new GLU(), texture[i]);
+                // mipmapsFromPNG(gl, new GLU(), texture[i]);
 
-                //<--}
+                // <--}
 
                 new GLU().gluBuild2DMipmaps(
                         GL.GL_TEXTURE_2D,
@@ -87,35 +116,68 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
                         GL.GL_UNSIGNED_BYTE,
                         texture[i].getPixels() // Imagedata
                 );
-            } catch( IOException e ) {
+            } catch (IOException e) {
                 System.out.println(e);
                 e.printStackTrace();
             }
         }
     }
 
-    private void drawBackground(GL gl){
-        gl.glEnable(GL.GL_BLEND);	// Turn Blending On
+    @Override
+    public void display(GLAutoDrawable glAutoDrawable) {
+
+        GL gl = glAutoDrawable.getGL();
+        gl.glClear(GL.GL_COLOR_BUFFER_BIT); // Clear The Screen And The Depth Buffer
+        gl.glLoadIdentity();
+
+        drawBackground(gl);
+        // Draw the POG
+        updatePogsPosition(gl);
+        drawPogs(gl, x, y);
+        // Draw the POG
+        drawBoard(gl, 0, -2, 0, 8);
+
+    }
+
+    private void updatePogsPosition(GL gl) {
+        for (int i = 0; i < listOfPogs.size(); i++) {
+            Pog ele = listOfPogs.get(i);
+            int startPoint = ele.getYposition();
+            if (ele.isDrop() && ele.getYposition() > ele.getMinHeight()) {
+                ele.setYposition(--startPoint);
+            }
+        }
+    }
+
+    private void drawBackground(GL gl) {
+        gl.glEnable(GL.GL_BLEND); // Turn Blending On
         gl.glBindTexture(GL.GL_TEXTURE_2D, textureIndex[textureNames.length - 1]);
 
         gl.glBegin(GL.GL_QUADS);
         // Front Face
-        gl.glTexCoord2f(0.0f, 0.0f); //Mix Image Coordinates with Mask Coordinates
-        gl.glVertex3f(-1.0f, -1.0f, -1.0f); //drawMask
-        gl.glTexCoord2f(1.0f, 0.0f); //Mix Image Coordinates with Mask Coordinates
-        gl.glVertex3f(1.0f, -1.0f, -1.0f); //drawMask
-        gl.glTexCoord2f(1.0f, 1.0f); //Mix Image Coordinates with Mask Coordinates
-        gl.glVertex3f(1.0f, 1.0f, -1.0f); //drawMask
-        gl.glTexCoord2f(0.0f, 1.0f); //Mix Image Coordinates with Mask Coordinates
-        gl.glVertex3f(-1.0f, 1.0f, -1.0f); //drawMask
+        gl.glTexCoord2f(0.0f, 0.0f); // Mix Image Coordinates with Mask Coordinates
+        gl.glVertex3f(-1.0f, -1.0f, -1.0f); // drawMask
+        gl.glTexCoord2f(1.0f, 0.0f); // Mix Image Coordinates with Mask Coordinates
+        gl.glVertex3f(1.0f, -1.0f, -1.0f); // drawMask
+        gl.glTexCoord2f(1.0f, 1.0f); // Mix Image Coordinates with Mask Coordinates
+        gl.glVertex3f(1.0f, 1.0f, -1.0f); // drawMask
+        gl.glTexCoord2f(0.0f, 1.0f); // Mix Image Coordinates with Mask Coordinates
+        gl.glVertex3f(-1.0f, 1.0f, -1.0f); // drawMask
         gl.glEnd();
 
         gl.glDisable(GL.GL_BLEND);
     }
 
-    private void drawSprite(GL gl , int x , int y ,  int index , int scale){
+    private void drawPogs(GL gl, int x, int y) {
+        for (int i = 0; i < listOfPogs.size(); i++) {
+            Pog ele = listOfPogs.get(i);
+            drawSprite(gl, ele.getXposition(), ele.getYposition(), ele.getAssetIndex(), 1);
+        }
+    }
+
+    private void drawSprite(GL gl, int x, int y, int index, int scale) {
         gl.glEnable(GL.GL_BLEND);
-        gl.glBindTexture(GL.GL_TEXTURE_2D, textureIndex[index]);	// Turn Blending On
+        gl.glBindTexture(GL.GL_TEXTURE_2D, textureIndex[index]); // Turn Blending On
 
         gl.glPushMatrix();
 
@@ -123,8 +185,6 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
 
         gl.glScaled(0.1 * scale, 0.1 * scale, 1);
 
-        System.out.println(x + " " + y);
-
         gl.glBegin(GL.GL_QUADS);
         // Front Face
         gl.glTexCoord2f(0.0f, 0.0f);
@@ -141,9 +201,9 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
         gl.glDisable(GL.GL_BLEND);
     }
 
-    private void drawBoard(GL gl , int x , int y ,  int index , int scale) {
+    private void drawBoard(GL gl, int x, int y, int index, int scale) {
         gl.glEnable(GL.GL_BLEND);
-        gl.glBindTexture(GL.GL_TEXTURE_2D, textureIndex[index]);	// Turn Blending On
+        gl.glBindTexture(GL.GL_TEXTURE_2D, textureIndex[index]); // Turn Blending On
 
         gl.glPushMatrix();
 
@@ -151,8 +211,6 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
 
         gl.glScaled(0.1 * scale, 0.1 * scale, 1);
 
-//        System.out.println(x + " " + y);
-
         gl.glBegin(GL.GL_QUADS);
         // Front Face
         gl.glTexCoord2f(0.0f, 0.0f);
@@ -169,7 +227,7 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
         gl.glDisable(GL.GL_BLEND);
     }
 
-    public BitSet keyBits = new BitSet(256); //Key Pressed Detector
+    public BitSet keyBits = new BitSet(256); // Key Pressed Detector
 
     public void handleKeyPress() {
 
@@ -191,6 +249,7 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
         return keyBits.get(keyCode);
     }
 
+<<<<<<< HEAD
 
     @Override
     public void display(GLAutoDrawable glAutoDrawable) {
@@ -211,6 +270,37 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
 
 
 
+=======
+    private void handleMousePosition() {
+        if (xposition >= -271 && xposition <= -210) {
+            nextColumnIndex = 0;
+            x = -60;
+        }
+        if (xposition >= -191 && xposition <= -130) {
+            nextColumnIndex = 1;
+            x = -40;
+        }
+        if (xposition >= -112 && xposition <= -51) {
+            nextColumnIndex = 2;
+            x = -20;
+        }
+        if (xposition >= -32 && xposition <= 29) {
+            nextColumnIndex = 3;
+            x = 0;
+        }
+        if (xposition >= 47 && xposition <= 109) {
+            nextColumnIndex = 4;
+            x = 20;
+        }
+        if (xposition >= 128 && xposition <= 188) {
+            nextColumnIndex = 5;
+            x = 40;
+        }
+        if (xposition >= 207 && xposition <= 269) {
+            nextColumnIndex = 6;
+            x = 60;
+        }
+>>>>>>> 343c2efe9d71b5a66c68c3eccad874128343b9d3
     }
 
     @Override
@@ -230,6 +320,7 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
 
     @Override
     public void mouseClicked(MouseEvent e) {
+<<<<<<< HEAD
          xposition = e.getX();
          yposition = e.getY();
 //        Component c = e.getComponent();
@@ -239,6 +330,25 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
 //        System.out.println(xposition + " " + yposition);
         System.out.println(xposition + " " + yposition);
 
+=======
+        double x = e.getX(), y = e.getY();
+        Component c = e.getComponent();
+        double width = c.getWidth(), height = c.getHeight();
+        xposition = (int) (x - (width / 2));
+        yposition = (int) ((height / 2) - y);
+        System.out.println("x : " + xposition + " y : " + yposition);
+        handleMousePosition();
+        if (currentPog < listOfPogs.size()) {
+            dropPogTo(-50, currentPog); // TODO: check if i can drop here or no ^^
+        }
+    }
+
+    private void dropPogTo(int minHeight, int current) {
+        Pog ele = listOfPogs.get(current);
+        ele.setMinHeight(minHeight);
+        ele.setDrop(true);
+        currentPog++;
+>>>>>>> 343c2efe9d71b5a66c68c3eccad874128343b9d3
     }
 
     @Override
@@ -259,5 +369,23 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        double xM = e.getX(), yM = e.getY();
+        Component c = e.getComponent();
+        double width = c.getWidth(), height = c.getHeight();
+        xposition = (int) (xM - (width / 2));
+        yposition = (int) ((height / 2) - yM);
+        handleMousePosition();
+        for (int i = currentPog; i < listOfPogs.size(); i++) {
+            listOfPogs.get(i).setXposition(x);
+        }
     }
 }

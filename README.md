@@ -37,20 +37,19 @@
 - [ ] Pause [Accepted] `Elkhouly`
     - [ ] pause logic when to stop the animator for not to display the scene at a moment (Freezing)
 
-- [ ] Menu [Accepted] `ElKhouly`
-    - [ ] Single Player Button
-    - [ ] MultiPlayer Button
-    - [ ] Play with AI Button
+- [X] Menu [Accepted] `ElKhouly`
+    - [X] Single Player Button
+    - [X] MultiPlayer Button
     - [ ] High Scores Button
     - [ ] Settings Button
-    - [ ] Exit Button
+    - [X] Exit Button
     - [ ] Game Background and Sound
 
-- [ ] Win-Lose [Accepted] `Yousef Amir`
-    - [ ] game engine logic 4 consecutive tuples
-	   - [ ] win horizontal
-	   - [ ] win vertical
-	   - [ ] win diagonal
+- [X] Win-Lose [Accepted] `Yousef Amir`
+    - [X] game engine logic 4 consecutive tuples
+	   - [X] win horizontal
+	   - [X] win vertical
+	   - [X] win diagonal
 
 - [ ] Score [Accepted] `Khafagy`
     - [ ] Store the time of the finished game for the user
@@ -61,10 +60,10 @@
 - [ ] AI [Accepted] `Mustafa Ahmed`
 	- [ ] Level Hard Logic MinMax Algorithm (Backtracking)
 
-- [ ] Username [Accepted] `Elkhouly`
-	- [ ] input for single player mode
-	- [ ] input for Multiplayer mode
-	- [ ] input for AI mode
+- [X] Username [Accepted] `Elkhouly`
+	- [X] input for single player mode
+	- [X] input for Multiplayer mode
+	- [X] input for AI mode
 
 - [ ] Collision [Accepted] `Ahmed Ezzeldeen`
 	- [ ] tuple lied down from above and rest in some empty shape which is above other tuple or is the first one
@@ -83,8 +82,8 @@
 - [ ] 3D [Denied]
 
 - [ ] GUI [Accepted] `Ahmed Ezzeldeen , Elkhouly`
-	- [ ] Main Frame
-	- [ ] Input Frame
+	- [X] Main Frame
+	- [X] Input Frame
 	- [ ] Themes Frame
 	- [ ] Settings Frame
 	- [ ] Hight Scores Frame
@@ -106,22 +105,22 @@
 	- [ ] Game Views Controller
 
 - [ ] Smooth Controls [Accepted] `Ahmed Ezzeldeen , Yousef Amir`
-	- [ ] mouse controls
+	- [X] mouse controls
 	- [ ] keypad controls
 	
 - [ ] High Scores [Accepted] `Khafagy`
 	- [ ] sort the user up to the shortest time they scored for their games
 	- [ ] update the score of the user if he break the score by time shorter than the last score 
 
-- [ ] Sound [Accepted] `Elkhouly>
+- [ ] Sound [Accepted] `Elkhouly`
 	- [ ] turn on/off background sound
-	- [ ] sound for the main frame menu
+	- [X] sound for the main frame menu
 	- [ ] sound for the normal scene
 	- [ ] sound for the dragon scene
 	- [ ] ratio input controls the sound volume
 
 - [ ] Animation [Accepted] `Mustafa Ahmed , Ezzeldeen , Yousef Amir`
-	- [ ] tuple lied down with fixed previos state for the previous tuples
+	- [X] tuple lied down with fixed previos state for the previous tuples
 	
 - [ ] Timer [Accepted] `Elkhouly>
 	- [ ] time you take to win or lose in the game as a user
