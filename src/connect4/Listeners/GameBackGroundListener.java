@@ -29,7 +29,9 @@ import javax.media.opengl.glu.GLU;
 public class GameBackGroundListener implements GLEventListener , MouseListener , KeyListener , ActionListener {
     int maxWidth = 100; //Initial Positions
     int maxHeight = 100;
+    GL gl;
     int xposition = 0 , yposition = 0;
+    int [] arr = {6,6,6,6,6,6,6};
     int animationIndex = 0;
 
 
@@ -201,7 +203,8 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
 //
 //        handleKeyPress();
 
-//        drawSprite(gl , xposition , yposition , 1 , 1);
+        drawSprite(gl , xposition , yposition , 1 , 1);
+
 //
         drawBoard(gl , 0 , -2 , 0 , 8);
 //
@@ -227,13 +230,15 @@ public class GameBackGroundListener implements GLEventListener , MouseListener ,
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int x = e.getX() , y = e.getY();
+         xposition = e.getX();
+         yposition = e.getY();
 //        Component c = e.getComponent();
 //        int width = c.getWidth() , height = c.getHeight();
 //        xposition = (int) (x / width * 800) - 800;
 //        yposition =  600 - (int) (y / height * 600);
 //        System.out.println(xposition + " " + yposition);
-        System.out.println(x + " " + y);
+        System.out.println(xposition + " " + yposition);
+
     }
 
     @Override
