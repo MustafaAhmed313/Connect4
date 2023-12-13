@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class gameEngineMulti {
-    int index = 0;
+    int index = 6;
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         gameEngineMulti connect4 = new gameEngineMulti();
@@ -15,7 +15,7 @@ public class gameEngineMulti {
             if (connect4.dropToken(column)) {
                 connect4.switchPlayer();
                 connect4.printBoard();
-
+                System.out.println(connect4.indexMove(column));
                 if (connect4.checkWin()) {
                     if (connect4.getCurrentPlayer() == 'X')
                         System.out.println("Player O wins!");
@@ -123,10 +123,11 @@ public class gameEngineMulti {
     }
     private int indexMove(int column) {
         for (int i = (ROWS - 1); i >= 0; i--) {
-            if (board[i][column] == ' ') {
-                index = i;
+            if (board[i][column] == ' ' && index >= 0) {
+                index--;
                 break;
             }
+            if (i==0) index = 0;
         }
         return index;
     }
