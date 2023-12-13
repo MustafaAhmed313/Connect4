@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SecondaryFrame extends JFrame implements ActionListener {
-    private static UserData user = new UserData();
+    public static UserData user = new UserData();
     private final JRadioButton radio1;
     private final JRadioButton radio2;
     private final JRadioButton radio3;
@@ -116,9 +116,9 @@ public class SecondaryFrame extends JFrame implements ActionListener {
             user.setLevel(3);
         }
         else if(e.getSource().equals(themButton)){
-            if(user.getNumPlayer()==1){
-                user.setUsername(text.getText());}
-                user.setName1(text.getText());
+            if(user.getNumPlayer()==1) {
+                user.setUsername(text.getText());
+            }
             new ThemesFrame() ;
         }
     }

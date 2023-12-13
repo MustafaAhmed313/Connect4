@@ -39,4 +39,5 @@ public class Connect4 {
             ex.printStackTrace();
         }
     }
+    public static GameStatus getGameStatus() {return gameStatus;}
 }

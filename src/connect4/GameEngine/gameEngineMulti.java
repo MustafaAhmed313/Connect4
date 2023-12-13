@@ -5,35 +5,10 @@ import java.util.Scanner;
 
 public class gameEngineMulti {
     int index = 6;
-
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        gameEngineMulti connect4 = new gameEngineMulti();
-        connect4.printBoard();
-
-        while (true) {
-            int column = input.nextInt();
-            if (connect4.dropToken(column)) {
-                connect4.switchPlayer();
-                connect4.printBoard();
-                System.out.println(connect4.indexMove(column));
-                if (connect4.checkWin()) {
-                    if (connect4.getCurrentPlayer() == 'X')
-                        System.out.println("Player O wins!");
-                    else
-                        System.out.println("Player X wins!");
-                    break;
-                }
-            } else {
-                System.out.println("Column is full. Try again.");
-            }
-        }
-    }
-
     private static final int ROWS = 6;
     private static final int COLUMNS = 7;
     private char[][] board;
-    private int arr[] = { 6, 6, 6, 6, 6, 6, 6 };
+    private int arr[] = {6,6,6,6,6,6,6};
     private char currentPlayer;
 
     public gameEngineMulti() {
@@ -124,9 +99,8 @@ public class gameEngineMulti {
     public void switchPlayer() {
         currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
     }
-
     public int indexMove(int column) {
-        for (int i = (ROWS - 1); i >= 0; i--) {
+        for (int i = (ROWS - 1); i >= 0 ; i--) {
             if (board[i][column] != ' ') {
                 arr[column]--;
                 if (arr[column] == -1) {

@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MultiPlayerFrame extends JFrame implements ActionListener {
-    private static UserData user = new UserData();
+    public  static UserData user = new UserData();
     private final JButton themButton;
     private final JLabel  label1;
     private final JLabel  label2;
@@ -84,7 +84,6 @@ public class MultiPlayerFrame extends JFrame implements ActionListener {
                 user.setName1(text1.getText());
                 user.setName2(text2.getText());
             }
-
             new ThemesFrame();
         }
     }

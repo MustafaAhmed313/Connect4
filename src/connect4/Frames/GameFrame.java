@@ -1,6 +1,8 @@
 package connect4.Frames;
 
+import connect4.Connect4;
 import connect4.Connect4.*;
+import connect4.GameEngine.UserData;
 import connect4.Listeners.GameBackGroundListener;
 import com.sun.opengl.util.Animator;
 import com.sun.opengl.util.FPSAnimator;
@@ -18,13 +20,15 @@ import java.awt.event.ActionListener;
 
 public class GameFrame extends JFrame implements ActionListener {
 
-    private final JButton pause = new JButton("||");
+    private final JButton pause;
     private JPanel ViewBoard = new JPanel();
     private JPanel ViewControl = new JPanel();
+    private static JLabel user1 , user2;
 
+
+    private static GLCanvas glCanvas;
+    public static Animator animate; // Animator Object.
     public GameFrame() {
-        GLCanvas glCanvas;
-        Animator animate; // Animator Object.
 
         GameBackGroundListener listeners = new GameBackGroundListener(); // Listener Creation
 
@@ -51,25 +55,53 @@ public class GameFrame extends JFrame implements ActionListener {
         ViewControl.setLayout(null);
         ViewControl.setBounds(800, 0, 200, 600);
         ViewControl.setBackground(Color.DARK_GRAY);
+        ViewControl.setFocusable(true);
+
+        pause = new JButton(" | | ");
+        pause.setBounds(860,500,70,50);
+        ViewControl.add(pause);
+        Font p1 = new Font( pause.getFont().getName(), Font.BOLD, 25);
+        pause.setFont(p1);
+        pause.setBackground(Color.CYAN);
+        pause.addActionListener(this);
+        add(pause);
+
+        if (Connect4.gameStatus.getMode() == 1) {
+            user1 = new JLabel(SecondaryFrame.user.getUsername());
+            ViewControl.add(user1);
+            add(user1);
+            user1.setBounds(860,50,70,50);
+        }else {
+            user1 = new JLabel(SecondaryFrame.user.getName1());
+            user2 = new JLabel(SecondaryFrame.user.getName2());
+            ViewControl.add(user1);
+            ViewControl.add(user2);
+            add(user1);
+            add(user2);
+        }
 
         setLayout(null);
 
         setTitle("Connect4"); // Iniyialize Jframe
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         setSize(1000, 600);
         setResizable(false);
+        setLocationRelativeTo(this);
         setVisible(true);
 
         setFocusable(true); // Focus on the Key Events
         glCanvas.requestFocus();
     }
 
-  
+    public static void main(String[] args) {
+        new GameFrame();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(pause)) {
             new PauseFrame();
+            animate.stop();
             setTitle("Connect4"); //Iniyialize Jframe
             System.out.println("menu");
         }

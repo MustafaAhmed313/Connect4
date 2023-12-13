@@ -1,11 +1,14 @@
 package connect4.Frames;
 
+import connect4.Connect4;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PauseFrame extends JFrame implements ActionListener {
+    private GameFrame gameFrame;
     private final JButton resume ;
     private final JButton endGame ;
     private final JButton setting ;
@@ -50,12 +53,12 @@ public class PauseFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource().equals(endGame)){
-            System.exit(0);
+
+            new MainFrame();
         }
-
         else if(e.getSource().equals(resume)){
+            GameFrame.animate.start();
             PauseFrame.closeFrame(this);
-
         }
         else if(e.getSource().equals(setting)){
             new SettingsFrame();
